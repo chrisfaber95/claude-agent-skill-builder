@@ -10,6 +10,17 @@ Central repo for my personal Claude Code skills and agents. It is a plugin (`my-
 - `.claude-plugin/marketplace.json` - lets projects install this repo by name
 - `templates/project/.claude/settings.json` - copy into each project
 
+## Contents
+
+Skills:
+- `/my-toolkit:commit` - Conventional Commits commit with secret check, never skips hooks
+- `/my-toolkit:pr` - open a GitHub PR from the whole branch (summary + test plan)
+- `/my-toolkit:release` - semver bump from commits, CHANGELOG, tag, push after confirmation
+- `/my-toolkit:resolve-conflicts` - merge/rebase conflict resolution (Claude can also trigger it)
+
+Agents:
+- `git-workflow-manager` - audit a repo's git setup and design/implement a workflow
+
 ## Use in a project
 
 1. This repo lives at github.com/chrisfaber95/claude-agent-skill-builder (private; each device needs `gh auth login` or a git credential).

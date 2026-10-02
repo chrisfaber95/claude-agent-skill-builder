@@ -18,6 +18,8 @@ Agents:
 - `git-workflow-manager` (haiku) - does all git/GitHub work: commit, push, PR, CI check, merge,
   branch cleanup, release, conflicts, workflow audits. Acts only on what the delegation
   authorizes; otherwise returns drafts for approval.
+- `sql-pro` (sonnet) - SQL writing and review, query tuning from execution plans, schema design,
+  safe migrations. Read-only against databases unless the delegation authorizes running statements.
 
 Skills (each agent's procedures; also callable directly as `/my-toolkit:<name>`):
 - `commit` - focused Conventional Commits commit with secret check, never skips hooks, verified push
@@ -25,6 +27,8 @@ Skills (each agent's procedures; also callable directly as `/my-toolkit:<name>`)
 - `merge` - CI verification, merge gates, squash merge, merged-branch cleanup (never `--admin`)
 - `release` - semver bump from commits, CHANGELOG, tag, push
 - `resolve-conflicts` - merge/rebase/cherry-pick conflict resolution
+- `query-tuning` - evidence-based slow query tuning (plan, bottleneck, rewrite/index, verify)
+- `safe-migration` - schema migrations with lock analysis, expand/contract, batched backfills, rollback
 
 Each future agent (tester, reviewer, coder, ...) gets its own skills the same way; shared
 project-specific rules go in the project's `WORKFLOW.md`, one section per agent.

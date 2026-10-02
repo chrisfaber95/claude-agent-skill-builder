@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "chris-marketplace": {
+      "source": { "source": "github", "repo": "chrisfaber95/claude-agent-skill-builder" }
+    }
+  },
+  "enabledPlugins": {
+    "my-toolkit@chris-marketplace": true
+  }
+}

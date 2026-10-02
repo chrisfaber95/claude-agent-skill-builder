@@ -5,6 +5,7 @@
     }
   },
   "enabledPlugins": {
-    "my-toolkit@chris-marketplace": true
+    "git@chris-marketplace": true,
+    "sql@chris-marketplace": true
   }
 }

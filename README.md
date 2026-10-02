@@ -1,56 +1,71 @@
 # claude-agent-skill-builder
 
-Central repo for my personal Claude Code skills and agents. It is a plugin (`my-toolkit`) and a marketplace (`chris-marketplace`) in one.
+My personal Claude Code agents and skills. This repo is a marketplace (`chris-marketplace`) with
+one plugin per agent. Each plugin holds the agent and the skills it follows, so everything for one
+agent lives in one folder and a project enables only the agents it needs.
 
 ## Layout
 
-- `skills/<name>/SKILL.md` - global skills (invoked as `/my-toolkit:<name>`)
-- `agents/<name>.md` - global subagents
-- `.claude-plugin/plugin.json` - plugin manifest
-- `.claude-plugin/marketplace.json` - lets projects install this repo by name
-- `templates/project/.claude/settings.json` - copy into each project
-- `templates/project/CLAUDE.md` - append to each project's CLAUDE.md
-- `templates/project/WORKFLOW.md` - optional per-project rules the agents read (one section per agent)
+```
+.claude-plugin/marketplace.json     lists the plugins below
+plugins/
+  git/                              plugin "git"  -> skills run as /git:<skill>
+    .claude-plugin/plugin.json
+    agents/git-workflow-manager.md
+    skills/commit, pr, merge, release, resolve-conflicts
+    CLAUDE.snippet.md               paste into a project's CLAUDE.md
+  sql/                              plugin "sql"  -> skills run as /sql:<skill>
+    .claude-plugin/plugin.json
+    agents/sql-pro.md
+    skills/query-writing, schema-design, query-tuning, safe-migration, db-setup
+    CLAUDE.snippet.md
+templates/
+  project/.claude/settings.json     enables the plugins in a project
+  project/WORKFLOW.md               optional per-project rules, one section per agent
+  plugin/                           skeleton for a new agent plugin
+```
 
-## Contents
+Skills are only discovered one level deep (`skills/<name>/SKILL.md`), so grouping is done by
+plugin, not by nested folders.
 
-Agents:
-- `git-workflow-manager` (haiku) - does all git/GitHub work: commit, push, PR, CI check, merge,
-  branch cleanup, release, conflicts, workflow audits. Acts only on what the delegation
+## Agents
+
+- `git-workflow-manager` (haiku, plugin `git`) - all git/GitHub work: commit, push, PR, CI check,
+  merge, branch cleanup, release, conflicts, workflow audits. Acts only on what the delegation
   authorizes; otherwise returns drafts for approval.
-- `sql-pro` (sonnet) - all database work: writing/reviewing queries, designing and building
-  databases, query tuning from execution plans, safe migrations, local/dev setup, roles, seed
-  data, imports, backup/restore. Always writes files; executes against a database only when the
-  delegation names what is authorized.
+- `sql-pro` (sonnet, plugin `sql`) - all database work: queries, designing and building databases,
+  tuning, migrations, local/dev setup, roles, seed data, imports, backup/restore. Always writes
+  files; executes against a database only when the delegation names what is authorized.
 
-Skills (each agent's procedures; also callable directly as `/my-toolkit:<name>`):
-- `commit` - focused Conventional Commits commit with secret check, never skips hooks, verified push
-- `pr` - GitHub PR with a structured description (summary, why, changes, architecture, testing, validation, limitations)
-- `merge` - CI verification, merge gates, squash merge, merged-branch cleanup (never `--admin`)
-- `release` - semver bump from commits, CHANGELOG, tag, push
-- `resolve-conflicts` - merge/rebase/cherry-pick conflict resolution
-- `query-writing` - queries and data modifications: grain, joins, NULLs, dates, safe UPDATE/DELETE, review checklist
-- `schema-design` - build a database from requirements: model, keys, types, constraints, indexes, ER diagram, seed data
-- `query-tuning` - evidence-based slow query tuning (plan, bottleneck, rewrite/index, verify)
-- `safe-migration` - schema migrations with lock analysis, expand/contract, batched backfills, rollback
-- `db-setup` - dev database (docker-compose), least-privilege roles, seed/import, backup and tested restore
-
-Each future agent (tester, reviewer, coder, ...) gets its own skills the same way; shared
-project-specific rules go in the project's `WORKFLOW.md`, one section per agent.
+Skills are each agent's procedures; the agent loads them by name (`git:commit`,
+`sql:query-tuning`, ...) and you can also run them directly as `/<plugin>:<skill>`.
 
 ## Use in a project
 
-1. This repo lives at github.com/chrisfaber95/claude-agent-skill-builder (private; each device needs `gh auth login` or a git credential).
-2. Copy `templates/project/.claude/settings.json` into the project's `.claude/`, append
-   `templates/project/CLAUDE.md` to the project's `CLAUDE.md`, optionally copy
-   `templates/project/WORKFLOW.md` to the project root and fill it in, and commit.
-3. On any device, open the project in Claude Code and accept the marketplace/plugin prompt.
-4. Project-specific skills/agents go in the project's own `.claude/skills/` and `.claude/agents/` and are committed with that project.
+1. This repo lives at github.com/chrisfaber95/claude-agent-skill-builder (private; each device
+   needs `gh auth login` or a git credential).
+2. Copy `templates/project/.claude/settings.json` into the project's `.claude/` and delete the
+   plugins the project does not need.
+3. Paste the matching `plugins/<name>/CLAUDE.snippet.md` into the project's `CLAUDE.md`.
+   Optionally copy `templates/project/WORKFLOW.md` to the project root and fill it in. Commit.
+4. On any device, open the project in Claude Code and accept the marketplace/plugin prompt.
+5. Project-specific skills/agents go in the project's own `.claude/skills/` and `.claude/agents/`
+   and are committed with that project.
+
+## Add a new agent (tester, reviewer, coder, ...)
+
+1. Copy `templates/plugin/` to `plugins/<name>/` and set the `name` in its `plugin.json`.
+2. Write the agent in `agents/` and its procedures in `skills/<skill>/SKILL.md`. In the agent,
+   reference skills as `<name>:<skill>`.
+3. Add the plugin to `.claude-plugin/marketplace.json` (`"source": "./plugins/<name>"`).
+4. Add a `CLAUDE.snippet.md` and, if the agent needs per-project rules, a section in
+   `templates/project/WORKFLOW.md`.
 
 ## Update
 
-Edit here, bump `version` in `plugin.json`, push. In a project run `/plugin marketplace update` (or restart) to pull the new version.
+Edit here, bump `version` in the plugin's `plugin.json`, push. In a project run
+`/plugin marketplace update` (or restart) to pull the new version.
 
 ## Try locally
 
-    claude --plugin-dir N:\Projects\claude-agent-skill-builder
+    claude --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\git --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\sql

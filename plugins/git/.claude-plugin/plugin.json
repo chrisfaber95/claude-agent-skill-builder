@@ -1,0 +1,6 @@
+{
+  "name": "git",
+  "description": "git-workflow-manager agent and its skills: commit, pr, merge, release, resolve-conflicts",
+  "version": "0.1.0",
+  "author": { "name": "Chris" }
+}

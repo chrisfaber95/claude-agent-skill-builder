@@ -1,6 +1,6 @@
 # Project workflow (optional)
 
-Project-specific rules that the my-toolkit agents read in addition to their own procedures. They
+Project-specific rules that the toolkit agents read in addition to their own procedures. They
 add to the toolkit's rules and never override its safety rules. Delete any section that does not
 apply. Add one section per agent as more agents are used.
 

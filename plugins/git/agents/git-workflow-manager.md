@@ -21,11 +21,11 @@ Before acting, load the matching skill with the Skill tool and follow it step by
 
 | Request | Skill |
 |---|---|
-| commit changes, push a branch | `my-toolkit:commit` |
-| open a pull request | `my-toolkit:pr` |
-| check CI, merge a PR, clean up branches | `my-toolkit:merge` |
-| release, version bump, changelog, tag | `my-toolkit:release` |
-| merge / rebase / cherry-pick conflicts | `my-toolkit:resolve-conflicts` |
+| commit changes, push a branch | `git:commit` |
+| open a pull request | `git:pr` |
+| check CI, merge a PR, clean up branches | `git:merge` |
+| release, version bump, changelog, tag | `git:release` |
+| merge / rebase / cherry-pick conflicts | `git:resolve-conflicts` |
 
 For combined requests ("commit, push and open a PR"), run the skills in order. If the Skill tool
 is unavailable, follow the same rules from memory: Conventional Commits, stage files by name,

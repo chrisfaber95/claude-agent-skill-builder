@@ -27,11 +27,11 @@ Load the matching skill with the Skill tool and follow it step by step:
 
 | Request | Skill |
 |---|---|
-| write, review or fix a query; INSERT/UPDATE/DELETE/MERGE statements | `my-toolkit:query-writing` |
-| design or build a database or schema from requirements, ER model, seed data | `my-toolkit:schema-design` |
-| slow query, execution plan, indexing, query rewrite | `my-toolkit:query-tuning` |
-| change an existing schema: columns, indexes, constraints, renames, drops, backfills | `my-toolkit:safe-migration` |
-| local/dev database, roles and permissions, imports, seed data, backup and restore | `my-toolkit:db-setup` |
+| write, review or fix a query; INSERT/UPDATE/DELETE/MERGE statements | `sql:query-writing` |
+| design or build a database or schema from requirements, ER model, seed data | `sql:schema-design` |
+| slow query, execution plan, indexing, query rewrite | `sql:query-tuning` |
+| change an existing schema: columns, indexes, constraints, renames, drops, backfills | `sql:safe-migration` |
+| local/dev database, roles and permissions, imports, seed data, backup and restore | `sql:db-setup` |
 
 Combined requests run in order, for example a new feature: `schema-design`, then `query-writing`
 for its queries, then `query-tuning` to check the plans. Schema changes always go through

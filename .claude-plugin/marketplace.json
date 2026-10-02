@@ -3,9 +3,14 @@
   "owner": { "name": "Chris" },
   "plugins": [
     {
-      "name": "my-toolkit",
-      "source": "./",
-      "description": "Personal skills and agents shared across all my projects"
+      "name": "git",
+      "source": "./plugins/git",
+      "description": "git-workflow-manager agent: commit, push, PR, CI, merge, release, conflicts"
+    },
+    {
+      "name": "sql",
+      "source": "./plugins/sql",
+      "description": "sql-pro agent: queries, schema design, tuning, migrations, database setup"
     }
   ]
 }

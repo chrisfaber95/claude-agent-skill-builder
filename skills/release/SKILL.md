@@ -1,12 +1,16 @@
 ---
 name: release
-description: "Cut a semver release: derive the version bump from Conventional Commits since the last tag, update the version file and CHANGELOG.md, commit, tag, and push after confirmation."
+description: "Procedure for cutting a semver release: derive the version bump from Conventional Commits since the last tag, update the version file and CHANGELOG.md, commit, tag, and push after confirmation. Followed by the git-workflow-manager agent; in a main session, delegate releases to that agent rather than running this directly."
 argument-hint: "[major|minor|patch]"
-disable-model-invocation: true
 allowed-tools: [Bash, Read, Edit, Grep, Glob]
 ---
 
 Cut a release. Requested bump (may be empty): $ARGUMENTS
+
+Confirmation (step 8): in a main session, ask the user. When running as the git-workflow-manager
+subagent, continue past step 8 only if the delegation prompt authorized the release ("release",
+"tag and push"). Otherwise stop there, leave the edits uncommitted, and return the version, the
+changelog section and the remaining commands.
 
 ## Steps
 

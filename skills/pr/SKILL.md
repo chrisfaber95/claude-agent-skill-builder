@@ -1,12 +1,16 @@
 ---
 name: pr
-description: "Open a GitHub pull request for the current branch with gh: Conventional Commits title, summary drawn from every commit on the branch, and a test plan."
+description: "Procedure for opening a GitHub pull request for the current branch with gh: Conventional Commits title, summary drawn from every commit on the branch, and a test plan. Followed by the git-workflow-manager agent; in a main session, delegate PRs to that agent rather than running this directly."
 argument-hint: "[base branch, default: repo default branch]"
-disable-model-invocation: true
 allowed-tools: [Bash, Read, Grep]
 ---
 
 Open a pull request for the current branch. Base branch (may be empty): $ARGUMENTS
+
+Confirmation: in a main session, ask the user before pushing or creating the PR. When running as
+the git-workflow-manager subagent, push or create the PR only if the delegation prompt authorized
+it ("push", "open the PR"). Otherwise stop after drafting and return the title, the body and the
+exact commands.
 
 ## Steps
 

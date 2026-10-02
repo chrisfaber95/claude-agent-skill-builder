@@ -9,22 +9,26 @@ Central repo for my personal Claude Code skills and agents. It is a plugin (`my-
 - `.claude-plugin/plugin.json` - plugin manifest
 - `.claude-plugin/marketplace.json` - lets projects install this repo by name
 - `templates/project/.claude/settings.json` - copy into each project
+- `templates/project/CLAUDE.md` - append to each project's CLAUDE.md
 
 ## Contents
 
-Skills:
-- `/my-toolkit:commit` - Conventional Commits commit with secret check, never skips hooks
-- `/my-toolkit:pr` - open a GitHub PR from the whole branch (summary + test plan)
-- `/my-toolkit:release` - semver bump from commits, CHANGELOG, tag, push after confirmation
-- `/my-toolkit:resolve-conflicts` - merge/rebase conflict resolution (Claude can also trigger it)
-
 Agents:
-- `git-workflow-manager` - audit a repo's git setup and design/implement a workflow
+- `git-workflow-manager` (haiku) - does all git/GitHub work: commit, push, PR, release,
+  conflicts, workflow audits. Acts only on what the delegation authorizes; otherwise returns
+  drafts for approval.
+
+Skills (procedures the agent loads; also callable directly as `/my-toolkit:<name>`):
+- `commit` - Conventional Commits commit with secret check, never skips hooks
+- `pr` - GitHub PR from the whole branch (summary + test plan)
+- `release` - semver bump from commits, CHANGELOG, tag, push
+- `resolve-conflicts` - merge/rebase/cherry-pick conflict resolution
 
 ## Use in a project
 
 1. This repo lives at github.com/chrisfaber95/claude-agent-skill-builder (private; each device needs `gh auth login` or a git credential).
-2. Copy `templates/project/.claude/settings.json` into the project's `.claude/` and commit it.
+2. Copy `templates/project/.claude/settings.json` into the project's `.claude/`, append
+   `templates/project/CLAUDE.md` to the project's `CLAUDE.md`, and commit both.
 3. On any device, open the project in Claude Code and accept the marketplace/plugin prompt.
 4. Project-specific skills/agents go in the project's own `.claude/skills/` and `.claude/agents/` and are committed with that project.
 

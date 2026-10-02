@@ -1,10 +1,14 @@
 ---
 name: resolve-conflicts
-description: "Resolve Git merge, rebase or cherry-pick conflicts by understanding the intent of both sides. Use when git reports CONFLICT, when files contain <<<<<<< markers, or when a merge or rebase is stopped."
+description: "Procedure for resolving Git merge, rebase or cherry-pick conflicts by understanding the intent of both sides. Applies when git reports CONFLICT, when files contain <<<<<<< markers, or when a merge or rebase is stopped. Followed by the git-workflow-manager agent; in a main session, delegate conflict resolution to that agent."
 allowed-tools: [Bash, Read, Edit, Grep, Glob]
 ---
 
 Resolve the current Git conflicts without losing either side's intent.
+
+Wherever a step says to ask the user: in a main session, ask. When running as the
+git-workflow-manager subagent, stop and return the question to the caller. Continue the
+merge or rebase only if the delegation prompt authorized "continue".
 
 ## Steps
 

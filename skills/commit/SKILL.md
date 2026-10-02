@@ -1,12 +1,14 @@
 ---
 name: commit
-description: "Create a Git commit with a Conventional Commits message: review changes, stage specific files, check for secrets, commit without skipping hooks."
+description: "Procedure for creating a Git commit with a Conventional Commits message: review changes, stage specific files, check for secrets, commit without skipping hooks. Followed by the git-workflow-manager agent; in a main session, delegate commits to that agent rather than running this directly."
 argument-hint: "[optional message hint or files]"
-disable-model-invocation: true
 allowed-tools: [Bash, Read, Grep]
 ---
 
 Create one commit for the current changes. User hint (may be empty): $ARGUMENTS
+
+Wherever a step says to ask the user: in a main session, ask. When running as the
+git-workflow-manager subagent, stop and return the proposal to the caller.
 
 ## Steps
 
@@ -37,4 +39,6 @@ Create one commit for the current changes. User hint (may be empty): $ARGUMENTS
    ```
 7. Never pass `--no-verify`, `--no-gpg-sign` or `--amend`. If a hook fails, the commit did not
    happen. Fix the cause, re-stage, and make a new commit.
-8. Run `git status` and show the commit with `git log --oneline -1`. Do not push.
+8. Run `git status` and show the commit with `git log --oneline -1`. Push (`git push`, or
+   `git push -u origin HEAD` for a new branch) only if the request explicitly includes pushing.
+   Never force-push.

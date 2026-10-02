@@ -12,7 +12,7 @@ Central repo for my personal Claude Code skills and agents. It is a plugin (`my-
 
 ## Use in a project
 
-1. Push this repo to GitHub and replace `chrisfaber95` in the template.
+1. This repo lives at github.com/chrisfaber95/claude-agent-skill-builder (private; each device needs `gh auth login` or a git credential).
 2. Copy `templates/project/.claude/settings.json` into the project's `.claude/` and commit it.
 3. On any device, open the project in Claude Code and accept the marketplace/plugin prompt.
 4. Project-specific skills/agents go in the project's own `.claude/skills/` and `.claude/agents/` and are committed with that project.

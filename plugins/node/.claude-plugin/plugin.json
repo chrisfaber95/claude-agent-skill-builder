@@ -1,6 +1,6 @@
 {
   "name": "node",
   "description": "node-specialist agent and its skills: node-performance, review-node",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": { "name": "Chris" }
 }

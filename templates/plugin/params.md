@@ -11,3 +11,7 @@ Read by the project-setup installer. "Recommend when" decides whether the plugin
 | Key | Used for | How to detect | Ask if unknown |
 |---|---|---|---|
 | example_key | what the agent uses this value for | where in the project it can be found | no, default `...` / yes |
+
+Every section in `.claude/project-params.md` can also get a `procedures` key, written by the
+installer: project procedures (from the project's own documents) that only this agent loads. You
+do not list it in this table.

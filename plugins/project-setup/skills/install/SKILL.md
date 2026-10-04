@@ -1,6 +1,6 @@
 ---
 name: install
-description: "Install or update the chris-marketplace plugins for the current project: scan the project, pre-select only plugins with concrete evidence, let the user add or remove plugins from this marketplace by hand, then write .claude/settings.json, .claude/project-params.md and a CLAUDE.md block after the user confirms. Run by hand with /project-setup:install."
+description: "Install or update the chris-marketplace plugins for the current project: scan the project, pre-select only plugins with concrete evidence, let the user add or remove plugins from this marketplace by hand, turn documented project procedures into files only the relevant agents load, then write .claude/settings.json, .claude/project-params.md, .claude/procedures/ and a CLAUDE.md block after the user confirms. Run by hand with /project-setup:install."
 argument-hint: "[optional: plugins to add or remove, for example +docs -playwright]"
 disable-model-invocation: true
 allowed-tools: [Read, Glob, Grep, Bash, Write, Edit]
@@ -81,7 +81,58 @@ fill in. Ask the user only for keys marked "Ask if unknown: yes" that could not 
 batched into one AskUserQuestion call (at most four questions; ask the most important first and
 leave the rest `unknown`).
 
-## 6. Check for conflicts
+## 6. Project procedures (optional)
+
+Turn procedures the project already documents into files that only the relevant agents load.
+Never invent a procedure: every step must come from a project document.
+
+1. Find candidate sources: documents imported or referenced from `CLAUDE.md` (for example
+   `@docs/WORKFLOW.md` and the files it points to), `CONTRIBUTING.md`, `RELEASING.md`, runbooks,
+   and `docs/**/*.md` or README sections written as instructions (numbered steps, "how to",
+   "before creating a PR", "release", "migrations", "test locally"). Skip descriptions, history
+   and anything that only restates generic practice without project-specific commands, paths,
+   names or rules.
+2. For each candidate, decide which selected plugin agents it is for, by topic: testing steps to
+   `test-automator` (and `frontend-tester` for end-to-end parts), commit, branch, PR, CI and merge
+   steps to `git-workflow-manager`, documentation and per-change records to
+   `documentation-engineer`, dependency rules to `dependency-manager`, migration and database
+   steps to `sql-pro`, and so on. Only agents of selected plugins qualify. One procedure can be
+   for several agents.
+3. Show a table: number, proposed file name, source document, for which agents, and a one-line
+   summary. Ask with AskUserQuestion: "Create these procedures?" with the options "Create all",
+   "Choose" (the user types numbers to keep, or reassigns agents, for example `2 -> sql-pro`) and
+   "Skip procedures".
+4. For each confirmed procedure, prepare `.claude/procedures/<short-name>.md`:
+   ```
+   # <Title>
+
+   For: <agent names>. Only agents that list this file in their section of
+   .claude/project-params.md load it.
+   Source: <path> (sha256 <first 12 hex characters>), generated <YYYY-MM-DD> by /project-setup:install
+
+   ## When this applies
+   <one or two lines from the source>
+
+   ## Steps
+   1. <condensed from the source, keeping the project's own commands, paths and names>
+
+   ## Rules from the source
+   - <project rules stated in the source that these agents must follow>
+   ```
+   Compute the hash with `sha256sum <path> | cut -c1-12` (Git Bash, Linux; `shasum -a 256` on
+   macOS; in PowerShell `(Get-FileHash <path> -Algorithm SHA256).Hash.Substring(0,12).ToLower()`).
+   Condense, but do not add steps, commands or rules that are not in the source. Keep each file
+   short; split a long source into several procedures by topic.
+5. Add the procedure paths to the `procedures` key in the section of each agent it is for, for
+   example `- procedures: .claude/procedures/test-locally.md, .claude/procedures/revision-docs.md`.
+   Procedures are never added to the `CLAUDE.md` block; the main session does not load them.
+
+On a re-run: keep a procedure file whose recorded hash still matches its source. If the source
+changed, show what changed and ask before regenerating it (say that manual edits to the file will
+be replaced). If a source no longer exists, ask before removing the file and its `procedures`
+entries. Never overwrite or delete a procedure file without asking.
+
+## 7. Check for conflicts
 
 If `.claude/agents/` contains a file whose agent name equals a selected plugin's agent (for
 example `code-reviewer.md` while `review` is selected), it can shadow the plugin agent. List
@@ -89,7 +140,7 @@ these and ask whether to move them to `.claude/agents-archive/` (keeping the fil
 delete them. If the user declines, leave them and say the old project agent may be used instead
 of the plugin agent.
 
-## 7. Preview and write
+## 8. Preview and write
 
 Show what will change in each file, then ask "Write these changes?" (Yes / No). Only after yes:
 
@@ -136,12 +187,15 @@ Project parameters for the agents: @.claude/project-params.md
 Every snippet ends with the same "Handoffs:" paragraph; include it only once so the block stays
 short.
 
+**`.claude/procedures/*.md`**: the confirmed procedure files from step 6, and their paths in
+the `procedures` key of each agent's section.
+
 **Conflicting agents**: move the confirmed files to `.claude/agents-archive/`.
 
-## 8. Finish
+## 9. Finish
 
-Report: the plugins enabled and disabled, files created or changed, conflicts handled, parameters
-still `unknown`, and the next step: restart Claude Code in this folder (or run `/plugin`) and
+Report: the plugins enabled and disabled, files created or changed, procedures created and which
+agents load them, conflicts handled, parameters still `unknown`, and the next step: restart Claude Code in this folder (or run `/plugin`) and
 accept the chris-marketplace trust prompt so the plugins install; the repository is private, so
 this device needs `gh auth login` or a git credential. Say that re-running `/project-setup:install`
 updates the setup and keeps edited parameters.

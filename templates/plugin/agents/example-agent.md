@@ -14,6 +14,15 @@ Read the project parameters: the `REPLACE_ME` section of `.claude/project-params
 `WORKFLOW.md` if that file does not exist. Project rules add to this file and never override the
 safety rules.
 
+## Project procedures
+
+If your section of `.claude/project-params.md` lists `procedures`, read each listed file before
+acting. They are this project's own procedures, written for the agents that list them. Follow
+them where they apply; they win over generic skill steps but never override your safety rules or
+widen what the delegation prompt authorized. Each file records its source document and a short
+sha256 of it; if the source now hashes differently, follow the source and mention the drift.
+Never load procedures that are not listed in your section.
+
 ## Pick the procedure
 
 Load the matching skill with the Skill tool and follow it step by step:

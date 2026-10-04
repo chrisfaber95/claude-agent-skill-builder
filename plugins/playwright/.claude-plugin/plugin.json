@@ -1,6 +1,6 @@
 {
   "name": "playwright",
   "description": "frontend-tester agent and its skills: setup, write-test, run-tests, debug-test. Uses the Playwright MCP server for browser exploration and test generation.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": { "name": "Chris" }
 }

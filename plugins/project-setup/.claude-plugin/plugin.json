@@ -1,6 +1,6 @@
 {
   "name": "project-setup",
   "description": "Installer for chris-marketplace: scans a project, recommends only the plugins it has evidence for, lets you pick others from this marketplace by hand, and writes the project's settings, CLAUDE.md block and agent parameters",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": { "name": "Chris" }
 }

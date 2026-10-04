@@ -18,6 +18,16 @@ return the question.
 2. Read the target code: the page/component to test, its HTML, data fixtures, and API mocks.
 3. Read the project parameters: the `playwright` section of `.claude/project-params.md`, or a root `WORKFLOW.md` if that file does not exist.
 
+## Project procedures
+
+If your section of `.claude/project-params.md` lists `procedures`, read each listed file before
+acting. They are this project's own procedures (for example how changes are tested, documented
+or released here), written for the agents that list them. Follow them where they apply; where
+one conflicts with a generic step of your skills, the project procedure wins. They never
+override your safety rules or widen what the delegation prompt authorized. Each file records its
+source document and a short sha256 of it; if the source now hashes differently, the procedure is
+out of date: follow the source document and mention the drift in your result. Never load procedures that are not listed in your section.
+
 ## Pick the procedure
 
 Load the matching skill with the Skill tool and follow it step by step:

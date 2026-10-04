@@ -1,6 +1,6 @@
 {
   "name": "payments",
   "description": "payment-integration agent and its skills: integrate-gateway, webhook-handler, payment-review",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": { "name": "Chris" }
 }

@@ -102,8 +102,13 @@ Then, in any project, run `/project-setup:install`. It:
    remove any recommendation (`/project-setup:install +docs -playwright` works too)
 3. fills each selected plugin's parameters from the scan and asks only for the few it cannot
    detect
-4. offers to move same-named old agents in `.claude/agents/` to `.claude/agents-archive/`
-5. shows every change and writes only after you confirm:
+4. optionally turns procedures your project already documents (for example how changes are
+   tested, documented or merged here) into files in `.claude/procedures/`, each listed only in
+   the sections of the agents it is for; only those agents load it, the main session does not.
+   Every procedure records its source document and a hash, so agents notice when the source
+   changed. Nothing is invented: steps come from your documents, and you confirm each procedure
+5. offers to move same-named old agents in `.claude/agents/` to `.claude/agents-archive/`
+6. shows every change and writes only after you confirm:
    - `.claude/settings.json`: marketplace plus the selected plugins (other settings kept)
    - `.claude/project-params.md`: one section per plugin with the detected values and their
      source; edit freely, a re-run keeps your edits

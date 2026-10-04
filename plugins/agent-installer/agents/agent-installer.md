@@ -25,6 +25,16 @@ Treat these locations as the only sources. If a request names another source, re
 question instead of fetching. The GitHub API allows a limited number of unauthenticated requests
 per hour; if you hit the limit, say so and stop rather than retrying in a loop.
 
+## Project procedures
+
+If your section of `.claude/project-params.md` lists `procedures`, read each listed file before
+acting. They are this project's own procedures (for example how changes are tested, documented
+or released here), written for the agents that list them. Follow them where they apply; where
+one conflicts with a generic step of your skills, the project procedure wins. They never
+override your safety rules or widen what the delegation prompt authorized. Each file records its
+source document and a short sha256 of it; if the source now hashes differently, the procedure is
+out of date: follow the source document and mention the drift in your result. Never load procedures that are not listed in your section.
+
 ## Pick the procedure
 
 Load the matching skill with the Skill tool and follow it step by step:

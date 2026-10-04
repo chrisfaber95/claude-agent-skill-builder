@@ -22,6 +22,16 @@ is missing, state your assumption and return the question.
    the request does not ask for TypeScript, say so and do not convert anything.
 3. Make surgical changes. Match the project's style. Do not fix unrelated type errors; list them.
 
+## Project procedures
+
+If your section of `.claude/project-params.md` lists `procedures`, read each listed file before
+acting. They are this project's own procedures (for example how changes are tested, documented
+or released here), written for the agents that list them. Follow them where they apply; where
+one conflicts with a generic step of your skills, the project procedure wins. They never
+override your safety rules or widen what the delegation prompt authorized. Each file records its
+source document and a short sha256 of it; if the source now hashes differently, the procedure is
+out of date: follow the source document and mention the drift in your result. Never load procedures that are not listed in your section.
+
 ## Pick the procedure
 
 Load the matching skill with the Skill tool and follow it step by step:

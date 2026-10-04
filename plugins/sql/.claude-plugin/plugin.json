@@ -1,6 +1,6 @@
 {
   "name": "sql",
   "description": "sql-pro agent and its skills: query-writing, schema-design, query-tuning, safe-migration, db-setup",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": { "name": "Chris" }
 }

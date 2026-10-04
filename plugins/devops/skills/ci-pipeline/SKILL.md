@@ -39,7 +39,7 @@ change repository settings or secrets.
    versions updatable (Dependabot for `github-actions` and the package ecosystems if the project
    wants it). Do not run `curl | sh` installers.
 8. Check names matter. If the project gates merging on CI check names, keep each job's `name`
-   stable and descriptive (for example one job per package: "ServerNest", "Klant"). Renaming a
+   stable and descriptive (for example one job per package: "api", "web"). Renaming a
    job silently removes it from the required set. State the exact check names in your report.
 9. Validate locally: check the YAML parses, and run `actionlint` if it is installed (do not
    install it globally); otherwise read the workflow against the syntax carefully and mark it

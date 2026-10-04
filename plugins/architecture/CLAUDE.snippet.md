@@ -9,3 +9,8 @@ technology choices) and architecture decision records to the `architect-reviewer
 
 The agent is read-only for source code and reports findings with evidence and options. It works
 on its own; if it lists follow-ups, you decide who does them.
+
+Handoffs: the agent's result may end with Handoffs entries (`to`, `why`, `task`, `context`,
+`needs authorization`). Route an entry to the named agent only if that agent is installed (it is
+in your list of available agents); otherwise do the work yourself or show it to the user. Never
+grant authorization the user has not given; ask first.

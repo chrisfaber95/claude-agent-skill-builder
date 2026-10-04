@@ -1,6 +1,6 @@
 {
   "name": "email",
   "description": "email-deliverability-engineer agent and its skills: email-auth-setup, transactional-email, deliverability-audit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": { "name": "Chris" }
 }

@@ -4,12 +4,35 @@ My personal Claude Code agents and skills. This repo is a marketplace (`chris-ma
 one plugin per agent. Each plugin holds the agent and the skills it follows, so everything for one
 agent lives in one folder and a project enables only the agents it needs.
 
-## Independence rule
+## Independence and handoffs
 
 Every plugin works on its own. No agent requires another agent or plugin to be installed or
-loaded, and none loads another plugin's skills. If a task touches another specialty (git,
-database, end-to-end tests, review), the agent does what is inside its own scope and lists the
-rest under "Follow-ups" for the main session to route. Remove any plugin and the others still work.
+loaded, and none loads another plugin's skills. Remove any plugin and the others still work.
+
+Agents can still pass work to each other, but only to agents that are installed:
+
+- **Handoffs** (all agents): when part of a task belongs to another specialty, the agent ends its
+  result with a Handoffs entry (`to`, `why`, `task`, `context`, `needs authorization`). The main
+  session routes it to the named agent if that agent is installed, otherwise does it itself or
+  shows it to you. Authorization is never passed on; the main session asks you first.
+- **Consults** (implementer agents, which have the `Agent` tool): an agent may ask another
+  installed agent for read-only help (a review, an analysis, design advice), at most twice per
+  task, without passing any authorization. Writes, git operations and database execution always
+  go back through the main session. Reviewers, the git agent and the installer only use handoffs.
+  Claude Code ignores agent-name limits on subagents, so these limits are enforced by the agents'
+  instructions, not by the platform.
+
+| Agent | Typically hands off to |
+|---|---|
+| `frontend-developer` | frontend-tester, api-designer, backend-developer, code-reviewer, git-workflow-manager |
+| `backend-developer` | api-designer, sql-pro, test-automator, payment-integration, email-deliverability-engineer, code-reviewer, git-workflow-manager |
+| `sql-pro` / `database-optimizer` | each other, backend-developer, code-reviewer, git-workflow-manager |
+| `payment-integration` | code-reviewer, backend-developer, frontend-developer, sql-pro, test-automator, git-workflow-manager |
+| `test-automator` / `frontend-tester` | each other, the implementer for bugs found, code-reviewer, git-workflow-manager |
+| `code-reviewer` / `architect-reviewer` | the implementer for each finding, test-automator, documentation-engineer |
+| `git-workflow-manager` | code-reviewer, devops-engineer, test-automator, documentation-engineer |
+
+Each agent's own "Working with other agents" section has its full list.
 
 ## Layout
 
@@ -87,7 +110,39 @@ rules. The `agent-installer` plugin's `vet` skill checks for these.
 ## Update
 
 Edit here, bump `version` in the plugin's `plugin.json`, push. In a project run
-`/plugin marketplace update` (or restart) to pull the new version.
+`/plugin marketplace update` (or restart) to pull the new version. Installed plugins are cached
+by version: a change without a version bump never reaches an installed copy. Before pushing, run
+
+    bash scripts/check-versions.sh origin/main
+
+which fails for any plugin whose files changed without a version bump.
+
+## Evals
+
+The `git`, `review`, `payments` and `sql` plugins have safety evals in `plugins/<name>/evals/`
+(force-push refusal, hooks never skipped, the reviewer never edits, live payment keys refused,
+no database execution without authorization). Run one plugin's suite with the bundled CLI:
+
+    claude plugin eval plugins/<name> --scaffold --trust-plugin --no-publish
+
+Each run starts real Claude sessions on your account (three runs per case plus a no-plugin
+baseline by default; `--runs 1` and `--max-cost-usd` keep it small). `--scaffold` runs the
+cases' own setup scripts, which only create a temporary git repo with fixture files. Add
+`--allow-tools Edit Write` (and `Bash` for the shell cases) so the agents can actually act.
+
+On Windows:
+- Cases tagged `needs-shell-sandbox` (git and sql) grant Bash, and the eval runner refuses to run
+  a shell it cannot sandbox; Windows has no sandbox backend. Run them on Linux or macOS. The
+  review and payments cases need no shell and run on Windows.
+- If the runner reports that a PATH directory could not be examined (EPERM), remove the
+  unreadable entry for that command only, for example in Git Bash:
+  `PATH=$(echo "$PATH" | tr ':' '\n' | grep -v 'system32/config/systemprofile' | paste -sd: -) claude plugin eval ...`
+
+Last results (one run each, 2026-10-04): review 1.00 with the plugin (delegated, loaded
+`review:` skill, found the bug, left the file untouched); payments 1.00 (delegated, refused the
+live key without printing it). The no-plugin baseline also passed in the second run, so most of
+this is Claude's default behavior; the plugin adds the delegation and the procedure. The git and
+sql cases have not been run yet.
 
 ## Try locally
 

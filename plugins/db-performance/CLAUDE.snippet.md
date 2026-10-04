@@ -11,3 +11,8 @@ prompt, include:
 The agent measures from the engine's own statistics, delivers changes as migration files with a
 rollback, and never alters a live database. It works on its own; if it lists follow-ups
 (application code, schema redesign), you decide who does them.
+
+Handoffs: the agent's result may end with Handoffs entries (`to`, `why`, `task`, `context`,
+`needs authorization`). Route an entry to the named agent only if that agent is installed (it is
+in your list of available agents); otherwise do the work yourself or show it to the user. Never
+grant authorization the user has not given; ask first.

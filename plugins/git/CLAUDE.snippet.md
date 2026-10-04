@@ -20,3 +20,8 @@ Final report after each piece of work (you write it, the agent only supplies the
 what was implemented and why, tests run, CI status, PR number, merge status, limitations and
 follow-ups. Keep it concise, then ask the user whether the implementation is correct and whether
 to move on to the next planned item.
+
+Handoffs: the agent's result may end with Handoffs entries (`to`, `why`, `task`, `context`,
+`needs authorization`). Route an entry to the named agent only if that agent is installed (it is
+in your list of available agents); otherwise do the work yourself or show it to the user. Never
+grant authorization the user has not given; ask first.

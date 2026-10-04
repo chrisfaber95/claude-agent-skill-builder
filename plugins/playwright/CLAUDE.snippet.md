@@ -11,3 +11,8 @@ The agent uses the Playwright MCP server for browser exploration and to generate
 selectors. It may install `@playwright/test` as a dev dependency, download browsers, and start
 the local dev server. It does not commit; it reports the test files and any `package.json`
 changes in its result. It works on its own; follow-ups it lists are for you to route.
+
+Handoffs: the agent's result may end with Handoffs entries (`to`, `why`, `task`, `context`,
+`needs authorization`). Route an entry to the named agent only if that agent is installed (it is
+in your list of available agents); otherwise do the work yourself or show it to the user. Never
+grant authorization the user has not given; ask first.

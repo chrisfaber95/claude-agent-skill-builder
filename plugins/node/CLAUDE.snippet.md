@@ -10,3 +10,8 @@ prompt, include:
 
 The agent measures before and after and reports only numbers it took. It works on its own and
 never touches production; if it lists follow-ups, you decide who does them.
+
+Handoffs: the agent's result may end with Handoffs entries (`to`, `why`, `task`, `context`,
+`needs authorization`). Route an entry to the named agent only if that agent is installed (it is
+in your list of available agents); otherwise do the work yourself or show it to the user. Never
+grant authorization the user has not given; ask first.

@@ -1,50 +1,44 @@
 ---
 name: run-tests
-description: "Procedure for running Playwright tests and analyzing results: ensure the app is running, execute the test suite, collect results and failures, and report findings with artifacts."
-argument-hint: "[optional: test file or pattern, browsers]"
+description: "Procedure for running Playwright tests unattended and reporting the results: make sure the app is reachable (webServer config, an already running server, or a dev server started and stopped by the agent), run non-interactively, and report counts, failures and artifact paths. Followed by the frontend-tester agent; in a main session, delegate Playwright test runs to that agent."
+argument-hint: "[test file or pattern, project name]"
 allowed-tools: [Bash, Read, Grep, Glob]
 ---
 
-Run tests and report results: $ARGUMENTS
+Run the Playwright tests and report: $ARGUMENTS
 
-Wherever a step says to ask the user: in a main session, ask. When running as the frontend-tester
-subagent, state the assumption and return the question.
+Wherever a step says to ask the user: in a main session, ask. When running as the
+frontend-tester subagent, state the assumption and return the question. Run against localhost
+only, unless the delegation prompt names another URL. Never use interactive modes (`--debug`,
+`--ui`, `--headed`, `show-report`, `show-trace`): nobody is there to close them and the run
+hangs.
 
 ## Steps
 
-1. Preconditions:
-   - `package.json`, `playwright.config.ts/js`, and the `tests/` directory exist and are readable.
-   - `@playwright/test` is installed: `npm list @playwright/test`.
-   - The dev server is running or will be started by the `webServer` config.
-2. Check the `webServer` setting in `playwright.config.ts`:
-   - If `webServer` is configured with a `command`, `npx playwright test` will start and stop the
-     app automatically. Proceed to step 4.
-   - If no `webServer`: check if the app is already running at the configured `baseURL` (default
-     `http://localhost:3000`). Send a HEAD or GET to the `baseURL` to check. If it responds, the
-     port is in use and the test will use it. If not, return the error and ask the user to start
-     the dev server, or provide the command to start it.
-3. If the port is not running and no `webServer` is configured, start the dev server:
-   - Detect the dev command: look for `test:dev` or `dev` in `package.json` scripts. If found,
-     run `npm run dev` with `--headless` or equivalent (check the script first). Use `run_in_background`
-     so you control when it stops.
-   - Poll the `baseURL` every 2 seconds for up to 30 seconds. Once it responds, proceed.
-   - Stop only the process you started after the tests complete.
-4. Run tests:
-   - Default: `npx playwright test`.
-   - Specific test file: `npx playwright test <file>`.
-   - Specific browser(s): `npx playwright test --project=chromium --project=firefox`.
-   - Use `--reporter=list` for concise output (also generates `html` report by default).
-   - Capture both stdout and stderr.
-5. Collect results:
-   - Summary: the first line usually shows "X passed, Y failed, Z skipped".
-   - Failures: list each failed test name and the first error message (assertion failure, timeout,
-     element not found, navigation failed).
-   - Artifacts: `test-results/` contains traces (`.zip` files), `playwright-report/` contains
-     the interactive HTML report. Report artifact paths so the user can inspect them.
-6. Investigate if requested:
-   - A single test can be re-run with `--repeat-each=5` to check for flakiness (passes sometimes,
-     fails others).
-   - Open the trace: `npx playwright show-trace <path>` in a browser (local preview only).
-7. Report: pass/fail/skip counts, failed test titles and their first error line (not a full
-   stack trace unless the error is complex), artifact paths, and flakiness if re-run. Report
-   only the first error per test; the user can read the HTML report for details.
+1. Preconditions: `@playwright/test` is installed (`npx playwright --version`) and a
+   `playwright.config.*` exists. If not, use the `setup` skill first, or report what is missing.
+2. Make sure the app is reachable, in this order:
+   1. The config has a `webServer`: Playwright starts the app, waits for its URL and stops it
+      afterwards. Nothing else to do.
+   2. No `webServer`, but the `baseURL` already responds (`curl -s -o /dev/null -w "%{http_code}"
+      <baseURL>`): use the running app and leave it running.
+   3. Neither: start the dev script from `package.json` in the background, poll the `baseURL`
+      every two seconds for up to two minutes, and stop exactly that process after the run. If it
+      does not come up, report the startup output and stop. Missing prerequisites (a database, a
+      backend, secrets in `.env`) are reported, not guessed.
+3. Run non-interactively with a plain reporter:
+   - everything: `npx playwright test --reporter=list`
+   - one file or pattern: `npx playwright test <path or pattern> --reporter=list`
+   - one browser project: add `--project=<name>`
+   On CI-like runs, `CI=1` keeps retries and `forbidOnly` behavior identical to the pipeline.
+4. Read the result: the summary line (passed, failed, flaky, skipped), and for each failure the
+   test title, the file and line, and the first error message. Artifacts per failed test are in
+   `test-results/<test-folder>/`: a screenshot, an `error-context.md` with the page state if the
+   Playwright version writes it, and a `trace.zip` when traces are on. A test marked flaky
+   passed only on retry; report it as flaky, not as passing.
+5. If asked to check flakiness, re-run the test alone with `--repeat-each=5 --reporter=list`
+   and report how many of the runs failed.
+6. Stop any dev server you started in step 2.3, and confirm the port is free again.
+7. Report: the command run, the counts, each failure with its first error line and artifact
+   paths, flaky tests, and anything that kept the run from starting. Report only what the output
+   showed.

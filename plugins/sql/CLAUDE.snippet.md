@@ -13,3 +13,8 @@ restore) to the `sql-pro` agent from the `sql` plugin. In the delegation prompt,
 The agent never runs against production unless you name it, never drops or rewrites existing
 data, and never prints or commits credentials. Review its migrations before they are applied, and
 commit them yourself or with whichever git agent you use.
+
+Handoffs: the agent's result may end with Handoffs entries (`to`, `why`, `task`, `context`,
+`needs authorization`). Route an entry to the named agent only if that agent is installed (it is
+in your list of available agents); otherwise do the work yourself or show it to the user. Never
+grant authorization the user has not given; ask first.

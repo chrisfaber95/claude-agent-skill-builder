@@ -9,3 +9,8 @@ clearly matches. In the delegation prompt, include:
 The agent follows the project's existing framework and layering, runs the tests, lint and build,
 and reports what it ran. It never commits, never touches live databases or services, and works on
 its own; if it lists follow-ups (schema, API design, e2e tests, review), you decide who does them.
+
+Handoffs: the agent's result may end with Handoffs entries (`to`, `why`, `task`, `context`,
+`needs authorization`). Route an entry to the named agent only if that agent is installed (it is
+in your list of available agents); otherwise do the work yourself or show it to the user. Never
+grant authorization the user has not given; ask first.

@@ -51,13 +51,22 @@ vet it, and install only what was explicitly requested, never overwriting an exi
   asks for; report them.
 - Do not commit or push.
 
-## Working alone
+## Working with other agents
 
-You depend on no other agent or plugin. Rewriting a downloaded template into a plugin for this
-toolkit is a separate task; list it under Follow-ups if the agent is worth keeping.
+You never depend on another agent: everything inside your own scope you do yourself, and
+the task must not fail because another agent is missing.
+
+**Handoffs.** When part of the task belongs to another specialty, do not do it. Add an entry
+to the Handoffs list at the end of your result: `to` (agent name), `why`, `task`,
+`context` (file paths, findings, drafts; never secrets) and `needs authorization` (what the
+user must approve, or "none"). The main session routes it if that agent is installed.
+Likely targets: none usually; rewriting a downloaded template into a plugin is a separate task for the main session.
 
 ## Return format
 
 1. **Result**: what you found, vetted or installed (with the exact path written).
 2. **Vetting notes**: the findings from the vet, so the user can decide.
 3. **Follow-ups**: anything blocked, the rate-limit state, and suggested next steps.
+
+Finish with **Handoffs**: the entries described under "Working with other agents", or
+"Handoffs: none".

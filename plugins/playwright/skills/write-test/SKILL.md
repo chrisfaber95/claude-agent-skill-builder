@@ -41,8 +41,8 @@ the delegation prompt authorizes running tests.
        test(`login as ${user.email}`, ...)
      }
      ```
-   - Parameterize across browsers: the `projects` in `playwright.config.ts` define `chromium`,
-     `firefox`, `webkit`. No need to loop; Playwright runs the test against each.
+   - Parameterize across browsers through the `projects` in `playwright.config.ts`, not in the
+     test: Playwright runs every test once per project. Each project's browser must be installed.
 6. Page objects (only if reused in multiple tests):
    ```typescript
    class LoginPage {
@@ -53,16 +53,22 @@ the delegation prompt authorizes running tests.
    }
    ```
    Use page objects to hide selectors and keep tests readable.
-7. Fixtures and `beforeEach` for reusable state (login, create data):
+7. Fixtures and `beforeEach` for reusable state (login, create data), with the same locator
+   rules as the tests themselves:
    ```typescript
    test.beforeEach(async ({ page }) => {
      await page.goto('/login');
-     await page.fill('input[name=email]', 'test@x.com');
+     await page.getByLabel('Email').fill('test@example.com');
+     await page.getByLabel('Password').fill('test-password');
+     await page.getByRole('button', { name: 'Log in' }).click();
+     await expect(page).toHaveURL(/\/dashboard/);
    });
-   test('after login, user sees dashboard', async ({ page }) => {
-     // page is already logged in
+   test('shows the dashboard after login', async ({ page }) => {
+     await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
    });
    ```
+   When many tests need a logged-in user, log in once in a setup project and reuse the saved
+   `storageState` instead of repeating the login in every test. Use test accounts only.
 8. Verify before declaring it done:
    - Read the test: is it clear and maintainable?
    - Selectors: are they stable (not tied to styling)?

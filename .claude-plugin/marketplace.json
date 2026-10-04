@@ -1,6 +1,9 @@
 {
   "name": "chris-marketplace",
   "owner": { "name": "Chris" },
+  "metadata": {
+    "description": "Personal Claude Code agents, one independent plugin per agent, each with its own skills"
+  },
   "plugins": [
     {
       "name": "git",

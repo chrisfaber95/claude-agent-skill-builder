@@ -10,3 +10,8 @@ include:
 The agent writes the files and validates them locally. It never deploys, pushes images, changes
 cloud resources, or edits repository settings and secrets; it lists those as steps for you. It
 works on its own; follow-ups it lists are for you to route.
+
+Handoffs: the agent's result may end with Handoffs entries (`to`, `why`, `task`, `context`,
+`needs authorization`). Route an entry to the named agent only if that agent is installed (it is
+in your list of available agents); otherwise do the work yourself or show it to the user. Never
+grant authorization the user has not given; ask first.

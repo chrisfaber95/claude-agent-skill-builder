@@ -27,7 +27,7 @@ git-workflow-manager subagent, stop and return the proposal to the caller.
      build, ci, chore, revert. The scope is optional, and `!` marks a breaking change.
    - A message must describe the change: `feat(orders): add order creation tests`, never
      `stuff` or `changes`.
-   - If a revision id was supplied, it may be the scope: `feat(rev-003): add order tests`.
+   - If a revision id was supplied, it may be the scope: `feat(rev-12): add order tests`.
    - Write the summary in the imperative, lower case, under 72 characters, with no trailing period.
    - Add a body only when the reason for the change is not obvious. For a breaking change, add a
      `BREAKING CHANGE: …` footer.

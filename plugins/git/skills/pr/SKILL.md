@@ -55,7 +55,7 @@ exact commands.
    Anything intentionally not implemented.
 
    ## Revision
-   Revision number and name (for example `REV-003-order-tests`), if one was supplied.
+   Revision number and name (for example `REV-012-short-name`), if one was supplied.
    ```
    - Summary and Changes come from the commits and diff.
    - Why, Architecture, Testing, Validation and Known limitations come from the delegation

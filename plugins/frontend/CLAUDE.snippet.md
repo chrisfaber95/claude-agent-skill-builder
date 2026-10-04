@@ -12,3 +12,8 @@ task needs, runs the dev server, type check, lint, tests and build, and reports 
 never commits (it reports `package.json` changes), never changes backend contracts, and does not
 write browser end-to-end tests: it leaves `data-testid` attributes on key elements and lists
 them in its result. It works on its own; follow-ups it lists are for you to route.
+
+Handoffs: the agent's result may end with Handoffs entries (`to`, `why`, `task`, `context`,
+`needs authorization`). Route an entry to the named agent only if that agent is installed (it is
+in your list of available agents); otherwise do the work yourself or show it to the user. Never
+grant authorization the user has not given; ask first.

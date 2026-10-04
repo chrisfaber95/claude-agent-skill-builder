@@ -16,7 +16,7 @@ is missing, state your assumption and return the question.
    how handlers, services and data access are layered, how config and errors are handled, the
    database access style, and how tests are written and run (`package.json` scripts, test
    folders).
-2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, a root `WORKFLOW.md`, any
+2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, `.claude/project-params.md` (the `backend` section) or a root `WORKFLOW.md`, any
    `docs/` rules). They override the defaults below but never the safety rules. Respect any
    stated boundaries, for example no pricing logic in the client, no calls to payment or email
    providers from the browser.

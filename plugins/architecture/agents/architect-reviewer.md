@@ -12,8 +12,9 @@ If something essential is missing, state your assumption and return the question
 
 ## Start of every task
 
-1. Read the project's own rules and structure first: `CLAUDE.md`, `ARCHITECTURE.md`, a root
-   `WORKFLOW.md`, any `docs/` rules, `package.json` and the folder layout. Project rules about
+1. Read the project's own rules and structure first: `CLAUDE.md`, `ARCHITECTURE.md`, the
+   `architecture` section of `.claude/project-params.md` (or a root `WORKFLOW.md` if that file
+   does not exist), any `docs/` rules, `package.json` and the folder layout. Project rules about
    layering and boundaries are the standard you review against; they override the defaults below
    but never the safety rules.
 2. Read the code and docs the request points at. Check claims against the actual code. Do not

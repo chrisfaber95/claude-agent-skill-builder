@@ -42,11 +42,12 @@ plugins/<name>/
   .claude-plugin/plugin.json
   agents/<agent>.md
   skills/<skill>/SKILL.md           run as /<name>:<skill>; the agent loads them as <name>:<skill>
-  CLAUDE.snippet.md                 paste into a project's CLAUDE.md
+  CLAUDE.snippet.md                 delegation instructions for a project's CLAUDE.md
+  params.md                         when the installer recommends the plugin, and its project parameters
   .mcp.json                         only if the plugin needs an MCP server (playwright)
+plugins/project-setup/              the installer (no agent; skill /project-setup:install)
 templates/
-  project/.claude/settings.json     enables plugins in a project (delete the lines you do not use)
-  project/WORKFLOW.md               optional per-project rules, one section per agent
+  project/.claude/settings.json     manual alternative to the installer (delete unused lines)
   plugin/                           skeleton for a new agent plugin
 ```
 
@@ -82,16 +83,48 @@ for anything else. Reviewers (`code-reviewer`, `architect-reviewer`) are read-on
 
 ## Use in a project
 
-1. This repo lives at github.com/chrisfaber95/claude-agent-skill-builder (private; each device
-   needs `gh auth login` or a git credential).
-2. Copy `templates/project/.claude/settings.json` into the project's `.claude/` and delete the
+This repo lives at github.com/chrisfaber95/claude-agent-skill-builder (private; each device
+needs `gh auth login` or a git credential).
+
+### With the installer (recommended)
+
+Once per device, install the installer at user level, so it exists in every project:
+
+    /plugin marketplace add chrisfaber95/claude-agent-skill-builder
+    /plugin install project-setup@chris-marketplace      (choose user scope)
+
+Then, in any project, run `/project-setup:install`. It:
+
+1. scans the project (manifests, dependencies, test scripts, CI files, databases, payment and
+   mail libraries, git repositories, existing docs and `.claude/` files)
+2. pre-selects only the plugins it finds concrete evidence for, and shows that evidence; every
+   other plugin of this marketplace is listed unselected so you can add it by hand, and you can
+   remove any recommendation (`/project-setup:install +docs -playwright` works too)
+3. fills each selected plugin's parameters from the scan and asks only for the few it cannot
+   detect
+4. offers to move same-named old agents in `.claude/agents/` to `.claude/agents-archive/`
+5. shows every change and writes only after you confirm:
+   - `.claude/settings.json`: marketplace plus the selected plugins (other settings kept)
+   - `.claude/project-params.md`: one section per plugin with the detected values and their
+     source; edit freely, a re-run keeps your edits
+   - `CLAUDE.md`: one marked block with the selected plugins' delegation instructions and an
+     import of the parameters file; nothing outside the block is touched
+
+Restart Claude Code in the project (or run `/plugin`) and accept the marketplace prompt to
+install the plugins. Re-run `/project-setup:install` any time to add or remove plugins. Only
+plugins from this marketplace are ever offered.
+
+### By hand
+
+1. Copy `templates/project/.claude/settings.json` into the project's `.claude/` and delete the
    plugins the project does not need.
-3. Paste the matching `plugins/<name>/CLAUDE.snippet.md` files into the project's `CLAUDE.md`.
-   Optionally copy `templates/project/WORKFLOW.md` to the project root and fill in the sections
-   for the agents you use. Commit.
-4. On any device, open the project in Claude Code and accept the marketplace/plugin prompt.
-5. Project-specific skills/agents go in the project's own `.claude/skills/` and `.claude/agents/`
-   and are committed with that project.
+2. Paste the matching `plugins/<name>/CLAUDE.snippet.md` files into the project's `CLAUDE.md`.
+3. Optionally create `.claude/project-params.md` with a section per plugin, using the keys in each
+   plugin's `params.md`. Agents read their section; without the file they fall back to a root
+   `WORKFLOW.md`. Commit.
+
+Project-specific skills/agents go in the project's own `.claude/skills/` and `.claude/agents/`
+and are committed with that project.
 
 ## Add a new agent
 
@@ -100,8 +133,9 @@ for anything else. Reviewers (`code-reviewer`, `architect-reviewer`) are read-on
    reference skills as `<name>:<skill>`, and never reference another plugin's agent or skills.
 3. Add the plugin to `.claude-plugin/marketplace.json` (`"source": "./plugins/<name>"`) and to
    `templates/project/.claude/settings.json`.
-4. Add a `CLAUDE.snippet.md` and, if the agent needs per-project rules, a section in
-   `templates/project/WORKFLOW.md`.
+4. Add a `CLAUDE.snippet.md` and a `params.md` (from `templates/plugin/params.md`): concrete
+   evidence for when the installer should recommend it, and the parameters the agent reads from
+   its section of `.claude/project-params.md`.
 
 Downloaded agent templates usually need rewriting first: remove instructions to query a
 "context manager", references to agents you do not have, and made-up metrics, and add safety

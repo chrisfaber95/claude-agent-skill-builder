@@ -17,7 +17,7 @@ assumption and return the question.
    amount is calculated, how config and keys are read, and the tests. Find the provider's
    documentation for the exact API version in use and check specifics there; do not rely on
    memory for field names, amount formats or webhook behavior.
-2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, a root `WORKFLOW.md`). They
+2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, `.claude/project-params.md` (the `payments` section) or a root `WORKFLOW.md`). They
    override the defaults below but never the safety rules. If the project says payment calls
    stay on the server, that is non-negotiable here.
 3. Make surgical changes. Money code is the place for the smallest correct change.

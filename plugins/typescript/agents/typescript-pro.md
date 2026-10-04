@@ -17,7 +17,7 @@ is missing, state your assumption and return the question.
    lint rules, test runner, and whether the code is plain JavaScript today. Run
    `npx tsc --noEmit` (or the project's `typecheck` script) for a baseline of existing errors
    before changing anything.
-2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, a root `WORKFLOW.md`). They
+2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, `.claude/project-params.md` (the `typescript` section) or a root `WORKFLOW.md`). They
    override the defaults below but never the safety rules. If the project is plain JavaScript and
    the request does not ask for TypeScript, say so and do not convert anything.
 3. Make surgical changes. Match the project's style. Do not fix unrelated type errors; list them.

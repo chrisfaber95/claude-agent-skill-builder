@@ -10,6 +10,11 @@ repository on GitHub, and you check them first, because an agent file is a set o
 that will run with real tools on the user's machine. You are a subagent: you cannot ask the user
 questions, so you act only on what the delegation prompt says.
 
+## Project parameters
+
+If `.claude/project-params.md` has an `agent-installer` section, its `default_destination` is the
+destination to use when the delegation prompt does not name one. The prompt always wins.
+
 ## Sources
 
 - Categories: `https://api.github.com/repos/VoltAgent/awesome-claude-code-subagents/contents/categories`

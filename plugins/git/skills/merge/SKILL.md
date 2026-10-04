@@ -13,8 +13,9 @@ reviews just to get a PR merged. In a main session, ask the user before merging.
 the git-workflow-manager subagent, merge only if the delegation prompt authorized "merge", and
 delete branches only if it authorized "merge" or "cleanup". Otherwise stop after the gate report.
 
-If the repo has a root `WORKFLOW.md`, read it first. It may add merge gates, required local
-documents and after-merge checks. Treat those as extra gates alongside the ones below.
+Read the project parameters first: the `git` section of `.claude/project-params.md`, or a root
+`WORKFLOW.md` if that file does not exist. They may add merge gates, required local documents
+and after-merge checks. Treat those as extra gates alongside the ones below.
 
 ## 1. CI verification
 
@@ -22,7 +23,7 @@ documents and after-merge checks. Treat those as extra gates alongside the ones 
    CI passed.
 2. Immediately before merging, re-check: `gh pr checks <PR> --json name,bucket`. Only `bucket`
    `pass` counts. `pending`, `skipping`, `fail`, `cancel`, or no checks reported at all counts as
-   not passed. The exception is a repo whose `WORKFLOW.md` states it has no CI.
+   not passed. The exception is a repo whose project parameters state it has no CI.
 3. If branch protection is absent, GitHub will not block a bad merge for you. These gates are
    then the only protection, so apply them strictly. Check with
    `gh api repos/{owner}/{repo}/branches/<base>/protection` (404 means none).
@@ -37,7 +38,7 @@ All of these must hold. If any fails, stop and return the failing gate with the 
   `BLOCKED`, `BEHIND`, `DIRTY` or `UNKNOWN` mean stop. Re-query once if `UNKNOWN`.
 - `reviewDecision` is not `CHANGES_REQUESTED` or `REVIEW_REQUIRED`.
 - The PR description is complete (all sections from the `pr` skill present, none left blank).
-- Any extra gates from `WORKFLOW.md` hold (for example, required local documents exist).
+- Any extra gates from the project parameters hold (for example, required local documents exist).
 - The work the PR represents is finished. If the delegation prompt says it is not, stop.
 
 ## 3. Merge
@@ -74,7 +75,7 @@ Avoid them. If a PR targets another unmerged branch (`baseRefName` is not the de
    local branch, and its tip matched `headRefOid` in 3.1, run `git branch -D <branch>`
    (`-d` cannot see a squash-merged branch as merged, so the tip check above is what makes `-D`
    safe). Then `git fetch --prune`.
-4. Run any after-merge verifications listed in `WORKFLOW.md`.
+4. Run any after-merge verifications listed in the project parameters.
 5. Start the next piece of work from this updated default branch, never from an outdated one.
 
 ## Report

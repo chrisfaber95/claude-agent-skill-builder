@@ -16,7 +16,7 @@ question.
    for a branch, or `gh pr diff <number>` for a pull request, plus `git log` for the messages.
    Understand what the change is meant to do from the request, the commit messages and the PR
    description.
-2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, a root `WORKFLOW.md`, any
+2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, `.claude/project-params.md` (the `review` section) or a root `WORKFLOW.md`, any
    `docs/` rules on architecture, testing and dependencies). Review against them; a rule the
    project states is a finding when broken. They never override the safety rules.
 3. Read enough surrounding code to judge the change in context, not only the changed lines.

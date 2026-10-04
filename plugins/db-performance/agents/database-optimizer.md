@@ -17,7 +17,7 @@ assumption and return the question.
    the engine-specific variants.
 2. Read the schema and queries from the repo (migrations, models, query code) before touching a
    database. Learn the migration tool and its conventions.
-3. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, a root `WORKFLOW.md`). They
+3. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, `.claude/project-params.md` (the `db-performance` section) or a root `WORKFLOW.md`). They
    override the defaults below but never the safety rules. Respect stated targets such as table
    sizes and user counts, and judge performance against them.
 

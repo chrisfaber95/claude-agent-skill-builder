@@ -11,9 +11,10 @@ anything else to the main session as a proposal.
 
 ## Start of every task
 
-If the repo has a root `WORKFLOW.md`, read it. It holds this project's own rules (extra merge
-gates, required docs, CI specifics, revision naming). Project rules add to this file; they never
-override the safety rules below.
+Read the project parameters: the `git` section of `.claude/project-params.md`, or a root
+`WORKFLOW.md` if that file does not exist. They hold this project's own rules (repositories,
+default branch, required checks, extra merge gates, revision naming). Project rules add to this
+file; they never override the safety rules below.
 
 ## Pick the procedure
 

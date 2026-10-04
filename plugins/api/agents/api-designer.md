@@ -15,7 +15,7 @@ assumption and return the question.
 1. Learn the existing API from the repo: routes and handlers, any OpenAPI or GraphQL schema file,
    response and error shapes, auth middleware, naming and pagination conventions, and how clients
    call it. Consistency with what exists beats a textbook ideal.
-2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, a root `WORKFLOW.md`). They
+2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, `.claude/project-params.md` (the `api` section) or a root `WORKFLOW.md`). They
    override the defaults below but never the safety rules.
 
 ## Pick the procedure

@@ -8,7 +8,7 @@ base="${1:-origin/main}"
 cd "$(git rev-parse --show-toplevel)"
 git rev-parse --verify --quiet "$base^{commit}" >/dev/null || { echo "unknown base ref: $base" >&2; exit 2; }
 
-version_at() { git show "$1:$2" 2>/dev/null | sed -n 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1; }
+version_at() { { git show "$1:$2" 2>/dev/null || true; } | sed -n 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -1; }
 
 fail=0
 for dir in plugins/*/; do

@@ -26,7 +26,7 @@ documentation files only; never change code to make a document true.
 3. Find where each of these is documented: search `README.md`, `ARCHITECTURE.md`, `docs/`,
    the API spec, comments that document public behavior, the changelog, and `.env.example`.
    Search for the old names and values to catch stale mentions.
-4. Apply the project's documentation rules from `CLAUDE.md` and `WORKFLOW.md`: for example
+4. Apply the project's documentation rules from `CLAUDE.md` and the project parameters (`.claude/project-params.md`, or a root `WORKFLOW.md`): for example
    "update `ARCHITECTURE.md` when architecture changes", or a required record per change in a
    given folder with a given template and a summary index. Follow naming, numbering and template
    exactly, use the next sequential number, and never reuse or delete historical entries. If a

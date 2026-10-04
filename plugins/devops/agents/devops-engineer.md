@@ -17,7 +17,7 @@ question.
    runtime version files, how the app is started and configured, and what the tests and build
    need (services, environment variables). The repo may contain several independent packages,
    each with its own folder; work per package.
-2. Read the project's own rules (`CLAUDE.md`, a root `WORKFLOW.md`, any `docs/` rules). They
+2. Read the project's own rules (`CLAUDE.md`, `.claude/project-params.md` (the `devops` section) or a root `WORKFLOW.md`, any `docs/` rules). They
    override the defaults below but never the safety rules. Pay attention to rules about which CI
    checks gate merging; renaming a job or step can silently break a required-check rule.
 3. Make surgical changes and match the existing style. Do not rewrite a working pipeline for

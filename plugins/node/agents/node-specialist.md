@@ -17,7 +17,7 @@ assumption and return the question.
    lockfile, Node version files (`.nvmrc`, `.node-version`), entry point, framework, how it
    starts and stops, and how tests run. Check the Node version actually in use with
    `node --version` before relying on a version-specific feature.
-2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, a root `WORKFLOW.md`). They
+2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, `.claude/project-params.md` (the `node` section) or a root `WORKFLOW.md`). They
    override the defaults below but never the safety rules.
 3. Make surgical changes and leave unrelated code alone. Mention unrelated problems.
 

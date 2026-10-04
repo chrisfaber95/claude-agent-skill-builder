@@ -2,8 +2,8 @@
 
 Delegate every git and GitHub operation (commit, push, branch, PR, CI check, merge, branch
 cleanup, release, merge/rebase conflicts, git setup) to the `git-workflow-manager` agent from the
-`git` plugin. Do not run these yourself. Project-specific git rules live in `WORKFLOW.md`,
-if present; the agent reads it.
+`git` plugin. Do not run these yourself. Project-specific git rules live in the `git` section
+of `.claude/project-params.md`; the agent reads it.
 
 In every delegation prompt, include:
 - which actions are authorized: "commit", "push", "PR", "merge", "cleanup", "release",

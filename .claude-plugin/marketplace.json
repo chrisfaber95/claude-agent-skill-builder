@@ -6,6 +6,11 @@
   },
   "plugins": [
     {
+      "name": "project-setup",
+      "source": "./plugins/project-setup",
+      "description": "Installer (install once at user level): recommends the plugins a project needs, lets you add others from this marketplace, and writes the project's agent parameters"
+    },
+    {
       "name": "git",
       "source": "./plugins/git",
       "description": "git-workflow-manager agent: commit, push, PR, CI, merge, release, conflicts"

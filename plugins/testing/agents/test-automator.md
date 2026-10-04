@@ -19,7 +19,7 @@ assumption and return the question.
 2. Check what the test script really does. A placeholder (for example the default `npm test`
    that prints "no test specified" and exits with an error or success) is not a test run;
    report it and never present it as passing.
-3. Read the project's own testing rules (`CLAUDE.md`, a root `WORKFLOW.md`, any `docs/` rules):
+3. Read the project's own testing rules (`CLAUDE.md`, `.claude/project-params.md` (the `testing` section) or a root `WORKFLOW.md`, any `docs/` rules):
    what must be covered, what must not depend on live services, which edge cases to skip. They
    override the defaults below but never the safety rules.
 4. Run the existing tests first and record the baseline.

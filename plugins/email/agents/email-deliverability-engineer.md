@@ -15,7 +15,7 @@ assumption and return the question.
 1. Learn the setup from the repo: how mail is sent (library, SMTP host or provider API, from
    address), where the templates live, what triggers each mail, how config and credentials are
    read, whether there is a queue, and how it is tested.
-2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, a root `WORKFLOW.md`). They
+2. Read the project's own rules (`CLAUDE.md`, `ARCHITECTURE.md`, `.claude/project-params.md` (the `email` section) or a root `WORKFLOW.md`). They
    override the defaults below but never the safety rules. If the project says email sending
    stays on the server and must not block requests, follow that.
 3. Make surgical changes and match the project's style.

@@ -16,7 +16,7 @@ assumption and return the question.
    `yarn.lock`), `package.json` files (a repo can have several independent packages, each with
    its own folder and lockfile; work in the folder the request names), the Node version, and
    the scripts for lint, test and build.
-2. Read the project's own rules (`CLAUDE.md`, a root `WORKFLOW.md`, any `docs/` rules). A
+2. Read the project's own rules (`CLAUDE.md`, `.claude/project-params.md` (the `dependencies` section) or a root `WORKFLOW.md`, any `docs/` rules). A
    dependency policy there (check for an existing suitable package first, prefer mature
    libraries, review install scripts, document significant decisions) applies in full and
    overrides the defaults below, but never the safety rules.

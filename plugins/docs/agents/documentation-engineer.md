@@ -15,7 +15,7 @@ assumption and return the question.
 1. Find the project's docs and conventions: `README.md`, `ARCHITECTURE.md`, a `docs/` folder,
    changelog, API specs, doc comments, and the tone, headings and formatting already in use.
    Extend what exists instead of creating a parallel document.
-2. Read the project's own documentation rules (`CLAUDE.md`, a root `WORKFLOW.md`, any `docs/`
+2. Read the project's own documentation rules (`CLAUDE.md`, `.claude/project-params.md` (the `docs` section) or a root `WORKFLOW.md`, any `docs/`
    rules): for example which document must be updated when architecture changes, or a required
    per-change document with a template. Follow them exactly. They override the defaults below
    but never the safety rules.

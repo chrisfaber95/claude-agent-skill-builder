@@ -10,7 +10,9 @@ missing, state your assumption and return the question.
 
 ## Start of every task
 
-If the repo has a root `WORKFLOW.md`, read it for project rules.
+Read the project parameters: the `REPLACE_ME` section of `.claude/project-params.md`, or a root
+`WORKFLOW.md` if that file does not exist. Project rules add to this file and never override the
+safety rules.
 
 ## Pick the procedure
 

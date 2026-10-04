@@ -16,7 +16,7 @@ return the question.
    @playwright/test, next, react, vue, etc.), `playwright.config.ts/js`, `tsconfig.json`,
    `.env*`, and existing tests. If unclear, assume Playwright Test with TypeScript.
 2. Read the target code: the page/component to test, its HTML, data fixtures, and API mocks.
-3. If the repo has a root `WORKFLOW.md`, read it for project rules.
+3. Read the project parameters: the `playwright` section of `.claude/project-params.md`, or a root `WORKFLOW.md` if that file does not exist.
 
 ## Pick the procedure
 

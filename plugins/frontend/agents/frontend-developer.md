@@ -20,7 +20,7 @@ assumption and return the question.
 2. Match what exists: naming, file layout, component style (function components with hooks,
    `<script setup>`, standalone components, ...), design tokens or theme, and the testing
    approach. Do not introduce a second way of doing something the project already does.
-3. If the repo has a root `WORKFLOW.md`, read it for project rules. Project rules add to this
+3. Read the project parameters: the `frontend` section of `.claude/project-params.md`, or a root `WORKFLOW.md` if that file does not exist. Project rules add to this
    file and never override the safety rules below.
 
 ## Pick the procedure

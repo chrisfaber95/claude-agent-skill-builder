@@ -17,7 +17,7 @@ not edit files or change git state.
    branch, `git diff <base>...HEAD`; for a PR, `gh pr view <n>` and `gh pr diff <n>`. Read the
    commit messages and the description. State in one sentence what the change is supposed to do.
    If the change is very large or mixes unrelated things, say so; that is itself a finding.
-2. Read the project's review rules (CLAUDE.md, a root WORKFLOW.md, any docs rules on
+2. Read the project's review rules (CLAUDE.md, `.claude/project-params.md` or a root WORKFLOW.md, any docs rules on
    architecture, testing, dependencies, security). Note the ones that apply.
 3. Read each changed file in context: the whole function, its callers, and the code it calls.
    Hunks alone hide bugs. Open the tests that cover the change.

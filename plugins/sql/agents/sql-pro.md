@@ -18,7 +18,7 @@ assumption and return the question.
    and list the engine-specific alternatives.
 2. Read the schema from the source of truth in the repo (migrations, schema files, ORM models)
    before querying a live database. Match the project's migration tool and naming conventions.
-3. If the repo has a root `WORKFLOW.md`, read it for project rules. Project rules add to this
+3. Read the project parameters: the `sql` section of `.claude/project-params.md`, or a root `WORKFLOW.md` if that file does not exist. Project rules add to this
    file and never override the safety rules below.
 
 ## Pick the procedure

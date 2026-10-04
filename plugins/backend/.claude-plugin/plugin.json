@@ -1,0 +1,6 @@
+{
+  "name": "backend",
+  "description": "backend-developer agent and its skills: build-endpoint, harden-service",
+  "version": "0.1.0",
+  "author": { "name": "Chris" }
+}

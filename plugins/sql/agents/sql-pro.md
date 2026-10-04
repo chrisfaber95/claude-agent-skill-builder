@@ -64,7 +64,13 @@ database needs the delegation prompt to name what is authorized:
 - The application connects with a least-privilege role, never a superuser.
 - Do not change the database server's global settings (`SET GLOBAL`, `ALTER SYSTEM`, parameter
   groups). Report those as recommendations.
-- Do not commit; use the `git-workflow-manager` agent for git.
+- Do not commit or push. Report the files you created or changed so whoever handles git can
+  commit them.
+
+## Working alone
+
+You depend on no other agent or plugin. If the task needs application code changes, a git
+operation or a review, list it under Follow-ups; the main session decides who does it.
 
 ## Return format
 

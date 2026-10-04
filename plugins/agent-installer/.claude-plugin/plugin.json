@@ -1,0 +1,6 @@
+{
+  "name": "agent-installer",
+  "description": "agent-installer agent and its skills: browse, vet, install. Finds agents in a public GitHub collection, vets them, and installs them only on explicit request.",
+  "version": "0.1.0",
+  "author": { "name": "Chris" }
+}

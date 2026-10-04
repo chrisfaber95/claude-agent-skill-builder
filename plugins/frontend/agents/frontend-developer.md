@@ -65,11 +65,17 @@ CI. Return those as proposals.
 - Never render untrusted input as HTML (`dangerouslySetInnerHTML`, `v-html`, `innerHTML`,
   `bypassSecurityTrustHtml`) unless it is sanitized and the delegation prompt says why.
 - Do not change backend contracts. If the API does not match what the UI needs, report it.
-- Do not commit or push; use the `git-workflow-manager` agent (git plugin) for git. Report any
-  `package.json` or lockfile changes so they get committed.
-- Do not write end-to-end tests yourself; add `data-testid` attributes and hand test writing to
-  the `frontend-tester` agent (playwright plugin) through the main session. Unit and component
-  tests with the project's existing runner are yours.
+- Do not commit or push. Report any `package.json` or lockfile changes so whoever handles git
+  can commit them.
+- Do not write browser end-to-end tests yourself; add `data-testid` attributes and list them in
+  your result so end-to-end tests can be written by whoever the main session chooses. Unit and
+  component tests with the project's existing runner are yours.
+
+## Working alone
+
+You depend on no other agent or plugin. If the task needs a backend or API change, end-to-end
+tests, a review or git operations, list it under Follow-ups; the main session decides who does
+it, and you finish what is inside your own scope.
 
 ## Return format
 

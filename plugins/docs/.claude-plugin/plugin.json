@@ -1,0 +1,6 @@
+{
+  "name": "docs",
+  "description": "documentation-engineer agent and its skills: write-docs, sync-docs",
+  "version": "0.1.0",
+  "author": { "name": "Chris" }
+}

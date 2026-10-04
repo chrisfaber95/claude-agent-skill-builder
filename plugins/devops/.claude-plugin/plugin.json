@@ -1,0 +1,6 @@
+{
+  "name": "devops",
+  "description": "devops-engineer agent and its skills: ci-pipeline, containerize",
+  "version": "0.1.0",
+  "author": { "name": "Chris" }
+}

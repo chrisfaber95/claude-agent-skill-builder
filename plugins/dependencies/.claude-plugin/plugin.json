@@ -1,0 +1,6 @@
+{
+  "name": "dependencies",
+  "description": "dependency-manager agent and its skills: audit-dependencies, upgrade-dependencies",
+  "version": "0.1.0",
+  "author": { "name": "Chris" }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "testing",
+  "description": "test-automator agent and its skills: write-tests, fix-flaky-tests, coverage-gaps",
+  "version": "0.1.0",
+  "author": { "name": "Chris" }
+}

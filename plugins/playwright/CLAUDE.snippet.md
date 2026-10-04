@@ -9,5 +9,5 @@ delegation prompt, include:
 
 The agent uses the Playwright MCP server for browser exploration and to generate stable
 selectors. It may install `@playwright/test` as a dev dependency, download browsers, and start
-the local dev server. Test files are committed with the project through the `git` plugin. Report
-any `package.json` changes in the result.
+the local dev server. It does not commit; it reports the test files and any `package.json`
+changes in its result. It works on its own; follow-ups it lists are for you to route.

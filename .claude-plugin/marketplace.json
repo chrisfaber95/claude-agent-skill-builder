@@ -13,6 +13,11 @@
       "description": "sql-pro agent: queries, schema design, tuning, migrations, database setup"
     },
     {
+      "name": "db-performance",
+      "source": "./plugins/db-performance",
+      "description": "database-optimizer agent: workload analysis, index strategy, read-only health checks"
+    },
+    {
       "name": "frontend",
       "source": "./plugins/frontend",
       "description": "frontend-developer agent: new apps, components, data fetching, accessibility, performance"
@@ -20,7 +25,72 @@
     {
       "name": "playwright",
       "source": "./plugins/playwright",
-      "description": "frontend-tester agent: setup, write tests, run tests, debug failures. MCP server included."
+      "description": "frontend-tester agent: Playwright setup, write tests, run tests, debug failures. MCP server included."
+    },
+    {
+      "name": "backend",
+      "source": "./plugins/backend",
+      "description": "backend-developer agent: endpoints, use-case logic, validation, service hardening"
+    },
+    {
+      "name": "node",
+      "source": "./plugins/node",
+      "description": "node-specialist agent: Node.js performance and runtime-level code review"
+    },
+    {
+      "name": "typescript",
+      "source": "./plugins/typescript",
+      "description": "typescript-pro agent: type design and incremental JavaScript to TypeScript migration"
+    },
+    {
+      "name": "api",
+      "source": "./plugins/api",
+      "description": "api-designer agent: API design, OpenAPI specs, breaking-change review"
+    },
+    {
+      "name": "architecture",
+      "source": "./plugins/architecture",
+      "description": "architect-reviewer agent: read-only design reviews and decision records"
+    },
+    {
+      "name": "review",
+      "source": "./plugins/review",
+      "description": "code-reviewer agent: read-only change and security reviews"
+    },
+    {
+      "name": "testing",
+      "source": "./plugins/testing",
+      "description": "test-automator agent: unit, integration and API tests, flaky tests, coverage gaps"
+    },
+    {
+      "name": "payments",
+      "source": "./plugins/payments",
+      "description": "payment-integration agent: provider integration, webhooks, payment security review (test mode only)"
+    },
+    {
+      "name": "email",
+      "source": "./plugins/email",
+      "description": "email-deliverability-engineer agent: SPF/DKIM/DMARC, transactional email code, deliverability audits"
+    },
+    {
+      "name": "dependencies",
+      "source": "./plugins/dependencies",
+      "description": "dependency-manager agent: dependency audits and safe upgrades"
+    },
+    {
+      "name": "docs",
+      "source": "./plugins/docs",
+      "description": "documentation-engineer agent: write docs and keep them in sync with code"
+    },
+    {
+      "name": "devops",
+      "source": "./plugins/devops",
+      "description": "devops-engineer agent: CI pipelines, Dockerfiles, docker-compose"
+    },
+    {
+      "name": "agent-installer",
+      "source": "./plugins/agent-installer",
+      "description": "agent-installer agent: browse, vet and install community agents"
     }
   ]
 }

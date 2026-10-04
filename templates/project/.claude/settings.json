@@ -7,7 +7,21 @@
   "enabledPlugins": {
     "git@chris-marketplace": true,
     "sql@chris-marketplace": true,
+    "db-performance@chris-marketplace": true,
     "frontend@chris-marketplace": true,
-    "playwright@chris-marketplace": true
+    "playwright@chris-marketplace": true,
+    "backend@chris-marketplace": true,
+    "node@chris-marketplace": true,
+    "typescript@chris-marketplace": true,
+    "api@chris-marketplace": true,
+    "architecture@chris-marketplace": true,
+    "review@chris-marketplace": true,
+    "testing@chris-marketplace": true,
+    "payments@chris-marketplace": true,
+    "email@chris-marketplace": true,
+    "dependencies@chris-marketplace": true,
+    "docs@chris-marketplace": true,
+    "devops@chris-marketplace": true,
+    "agent-installer@chris-marketplace": true
   }
 }

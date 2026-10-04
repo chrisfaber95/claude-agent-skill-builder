@@ -12,4 +12,4 @@ restore) to the `sql-pro` agent from the `sql` plugin. In the delegation prompt,
 
 The agent never runs against production unless you name it, never drops or rewrites existing
 data, and never prints or commits credentials. Review its migrations before they are applied, and
-commit through the `git-workflow-manager` agent (git plugin).
+commit them yourself or with whichever git agent you use.

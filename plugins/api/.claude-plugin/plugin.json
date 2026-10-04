@@ -1,0 +1,6 @@
+{
+  "name": "api",
+  "description": "api-designer agent and its skills: design-api, write-openapi, review-api-change",
+  "version": "0.1.0",
+  "author": { "name": "Chris" }
+}

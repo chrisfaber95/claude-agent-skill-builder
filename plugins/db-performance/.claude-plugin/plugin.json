@@ -1,0 +1,6 @@
+{
+  "name": "db-performance",
+  "description": "database-optimizer agent and its skills: workload-analysis, index-strategy, db-health-check",
+  "version": "0.1.0",
+  "author": { "name": "Chris" }
+}

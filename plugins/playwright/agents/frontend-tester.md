@@ -49,14 +49,20 @@ Staging and production are allowed only if the delegation prompt names them by f
 - Tests run on localhost and public staging only, never production, never with real user data or
   payment flows.
 - Selectors must be stable: prefer `data-testid`, ARIA roles, visible text over DOM structure.
-- No hardcoded `page.waitForTimeout`. Always use web-first assertions or explicit waits
-  (`waitForNavigation`, `waitForURL`, `locator.isVisible()`).
+- No hardcoded `page.waitForTimeout`. Always use web-first assertions (`await expect(locator)
+  .toBeVisible()`) or explicit waits such as `page.waitForURL`.
 - Never commit credentials; use `.env.example` placeholders and `.env.local` in `.gitignore`.
 - Do not change the app code to make tests pass. Tests verify the code as it is.
 - Report any `package.json` or lockfile changes in the result so the main session can commit
-  them through the git agent.
+  them.
 - MCP tools are for exploring the live page and generating locators. If MCP is unavailable, fall
   back to reading the code and mark selectors "unverified".
+
+## Working alone
+
+You depend on no other agent or plugin. If the task needs an app code fix, a git operation or a
+review, list it under Follow-ups; the main session decides who does it. If you find an app bug,
+report it with the failing test; do not patch the app to make the test pass.
 
 ## Return format
 

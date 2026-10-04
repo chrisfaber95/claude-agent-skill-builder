@@ -65,4 +65,4 @@ Set up Playwright Test for this project.
    with a passing test to verify setup. Delete this file after confirmation, or leave it as a
    template.
 9. Report: files created, commands run, whether the setup was verified by running one test, and
-   any changes to `package.json` (the agent will commit these through the git plugin).
+   any changes to `package.json` (the agent does not commit; whoever handles git does).

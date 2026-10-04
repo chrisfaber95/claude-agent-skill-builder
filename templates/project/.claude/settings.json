@@ -7,6 +7,7 @@
   "enabledPlugins": {
     "git@chris-marketplace": true,
     "sql@chris-marketplace": true,
+    "frontend@chris-marketplace": true,
     "playwright@chris-marketplace": true
   }
 }

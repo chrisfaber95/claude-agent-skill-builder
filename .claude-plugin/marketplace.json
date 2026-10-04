@@ -13,6 +13,11 @@
       "description": "sql-pro agent: queries, schema design, tuning, migrations, database setup"
     },
     {
+      "name": "frontend",
+      "source": "./plugins/frontend",
+      "description": "frontend-developer agent: new apps, components, data fetching, accessibility, performance"
+    },
+    {
       "name": "playwright",
       "source": "./plugins/playwright",
       "description": "frontend-tester agent: setup, write tests, run tests, debug failures. MCP server included."

@@ -25,3 +25,13 @@ apply. Add one section per agent as more agents are used.
 ### Local permissions
 - Allow deleting merged branches without prompts by adding to this project's
   `.claude/settings.local.json` (not the shared settings), limited to `feature/*`.
+
+## Frontend (read by frontend-developer)
+
+- Framework and versions to target: <for example React 18, Vite, TypeScript strict>
+- Styling and design tokens: <for example Tailwind, tokens in src/styles/tokens.css>
+- Component layout and naming: <for example src/features/<name>/, PascalCase files>
+- Unit test runner and command: <for example Vitest, `npm test`>
+- Browser support and accessibility target: <for example last 2 versions, WCAG 2.2 AA>
+- `data-testid` naming convention: <for example kebab-case, `<feature>-<element>`>
+- Dependencies that must not be added: <list>

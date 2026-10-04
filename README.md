@@ -19,6 +19,11 @@ plugins/
     agents/sql-pro.md
     skills/query-writing, schema-design, query-tuning, safe-migration, db-setup
     CLAUDE.snippet.md
+  frontend/                         plugin "frontend" -> skills run as /frontend:<skill>
+    .claude-plugin/plugin.json
+    agents/frontend-developer.md
+    skills/scaffold-app, build-component, data-fetching, accessibility-review, performance-review
+    CLAUDE.snippet.md
   playwright/                       plugin "playwright" -> skills run as /playwright:<skill>
     .claude-plugin/plugin.json
     .mcp.json                       declares Playwright MCP server
@@ -42,13 +47,17 @@ plugin, not by nested folders.
 - `sql-pro` (sonnet, plugin `sql`) - all database work: queries, designing and building databases,
   tuning, migrations, local/dev setup, roles, seed data, imports, backup/restore. Always writes
   files; executes against a database only when the delegation names what is authorized.
+- `frontend-developer` (sonnet, plugin `frontend`) - builds frontend apps and UI in the project's
+  own framework (React, Vue, Angular, ...): scaffolding, components, data fetching and real-time,
+  accessibility and performance reviews. Verifies with type check, lint, tests and build; leaves
+  `data-testid` hooks for `frontend-tester`; never commits.
 - `frontend-tester` (sonnet, plugin `playwright`) - all frontend testing: setting up Playwright,
   writing and reviewing tests, running test suites, debugging failures. Uses the Playwright MCP
   server to explore pages and generate selectors. Writes test files; runs them only when
   authorized (default: local localhost, not production).
 
 Skills are each agent's procedures; the agent loads them by name (`git:commit`,
-`sql:query-tuning`, `playwright:setup`, ...) and you can also run them directly as
+`sql:query-tuning`, `frontend:build-component`, `playwright:setup`, ...) and you can also run them directly as
 `/<plugin>:<skill>`.
 
 ## Use in a project
@@ -79,4 +88,4 @@ Edit here, bump `version` in the plugin's `plugin.json`, push. In a project run
 
 ## Try locally
 
-    claude --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\git --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\sql --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\playwright
+    claude --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\git --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\sql --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\frontend --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\playwright

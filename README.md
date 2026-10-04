@@ -19,6 +19,12 @@ plugins/
     agents/sql-pro.md
     skills/query-writing, schema-design, query-tuning, safe-migration, db-setup
     CLAUDE.snippet.md
+  playwright/                       plugin "playwright" -> skills run as /playwright:<skill>
+    .claude-plugin/plugin.json
+    .mcp.json                       declares Playwright MCP server
+    agents/frontend-tester.md
+    skills/setup, write-test, run-tests, debug-test
+    CLAUDE.snippet.md
 templates/
   project/.claude/settings.json     enables the plugins in a project
   project/WORKFLOW.md               optional per-project rules, one section per agent
@@ -36,9 +42,14 @@ plugin, not by nested folders.
 - `sql-pro` (sonnet, plugin `sql`) - all database work: queries, designing and building databases,
   tuning, migrations, local/dev setup, roles, seed data, imports, backup/restore. Always writes
   files; executes against a database only when the delegation names what is authorized.
+- `frontend-tester` (sonnet, plugin `playwright`) - all frontend testing: setting up Playwright,
+  writing and reviewing tests, running test suites, debugging failures. Uses the Playwright MCP
+  server to explore pages and generate selectors. Writes test files; runs them only when
+  authorized (default: local localhost, not production).
 
 Skills are each agent's procedures; the agent loads them by name (`git:commit`,
-`sql:query-tuning`, ...) and you can also run them directly as `/<plugin>:<skill>`.
+`sql:query-tuning`, `playwright:setup`, ...) and you can also run them directly as
+`/<plugin>:<skill>`.
 
 ## Use in a project
 
@@ -68,4 +79,4 @@ Edit here, bump `version` in the plugin's `plugin.json`, push. In a project run
 
 ## Try locally
 
-    claude --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\git --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\sql
+    claude --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\git --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\sql --plugin-dir N:\Projects\claude-agent-skill-builder\plugins\playwright

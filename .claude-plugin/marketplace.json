@@ -11,6 +11,11 @@
       "name": "sql",
       "source": "./plugins/sql",
       "description": "sql-pro agent: queries, schema design, tuning, migrations, database setup"
+    },
+    {
+      "name": "playwright",
+      "source": "./plugins/playwright",
+      "description": "frontend-tester agent: setup, write tests, run tests, debug failures. MCP server included."
     }
   ]
 }

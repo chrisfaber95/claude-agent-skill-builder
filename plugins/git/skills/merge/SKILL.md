@@ -21,8 +21,9 @@ and after-merge checks. Treat those as extra gates alongside the ones below.
 
 ## 1. CI verification
 
-1. Wait for checks to finish: `gh pr checks <PR> --watch`. Do not assume a local test run means
-   CI passed.
+1. Wait for checks to finish without streaming output: `gh pr checks <PR> --watch --fail-fast >
+   /dev/null 2>&1` (on Windows PowerShell, `> $null`), or poll the compact form in step 2. Do not
+   assume a local test run means CI passed.
 2. Immediately before merging, re-check: `gh pr checks <PR> --json name,bucket`. Only `bucket`
    `pass` counts. `pending`, `skipping`, `fail`, `cancel`, or no checks reported at all counts as
    not passed. The exception is a repo whose project parameters state it has no CI.

@@ -17,7 +17,7 @@ exact commands.
 
 ## Steps
 
-1. Run these checks:
+1. Run these checks, as independent commands in one call where possible:
    - `gh auth status`. If gh is not authenticated, stop.
    - The base is `$ARGUMENTS` if given, otherwise
      `gh repo view --json defaultBranchRef -q .defaultBranchRef.name`.
@@ -25,10 +25,15 @@ exact commands.
    - `git status`: if there are uncommitted changes, stop and report them. Commit them first
      with the `commit` skill, or confirm they are meant to stay out of the PR.
    - `gh pr view --json url` succeeds: a PR already exists. Show its URL and stop.
-2. Read the whole branch, not just the last commit:
+2. Read the whole branch, not just the last commit. Keep output small, since every tool result is
+   re-read on each later turn:
    - `git fetch origin <base>`
    - `git log origin/<base>..HEAD --format='%h %s%n%b'`
-   - `git diff origin/<base>...HEAD --stat`, plus the full diff where you need detail
+   - `git diff origin/<base>...HEAD --stat`
+   - The commit messages and the stat are normally enough to write the PR. Read a full diff only
+     for specific files (`git diff origin/<base>...HEAD -- <path>`) when they do not explain a
+     change, never the whole diff of a large branch, and skip lock files, generated files and
+     minified output.
 3. Draft the title: a Conventional Commits summary under 70 characters, for example
    `feat: add order creation tests`. It becomes the commit message on the default branch after a
    squash merge, so it must follow the convention.

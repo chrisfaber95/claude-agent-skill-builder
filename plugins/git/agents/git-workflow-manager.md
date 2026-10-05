@@ -38,6 +38,10 @@ Before acting, load the matching skill with the Skill tool and follow it step by
 | release, version bump, changelog, tag | `git:release` |
 | merge / rebase / cherry-pick conflicts | `git:resolve-conflicts` |
 
+Keep token use low: every tool result is re-read on each later turn. Batch independent read-only
+commands (`git status`, `git log`, `git diff --stat`, `gh pr view`) into one Bash call, prefer
+`--stat`, `--json` and `-q` over full output, and never print a whole large diff or CI log.
+
 For combined requests ("commit, push and open a PR"), run the skills in order. If the Skill tool
 is unavailable, follow the same rules from memory: Conventional Commits, stage files by name,
 check for secrets, never skip hooks, never merge unless CI is green.

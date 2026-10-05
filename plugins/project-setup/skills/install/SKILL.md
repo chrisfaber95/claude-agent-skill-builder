@@ -26,7 +26,8 @@ Locate the local clone of chris-marketplace, in this order:
 
 From the catalog read `.claude-plugin/marketplace.json` (plugin names, descriptions, sources),
 and for each plugin: `params.md` (when to recommend, parameters), `CLAUDE.snippet.md`, and the
-agent name in `agents/*.md`. Skip `project-setup` itself; it is installed at user level.
+agent name in `agents/*.md`. Leave `project-setup` itself out of the recommendation table; it is
+the installer and is already enabled in this project.
 
 ## 2. Scan the project (read-only)
 
@@ -149,7 +150,9 @@ Show what will change in each file, then ask "Write these changes?" (Yes / No). 
 `{ "source": { "source": "github", "repo": "chrisfaber95/claude-agent-skill-builder" } }`. In
 `enabledPlugins`, set `"<plugin>@chris-marketplace": true` for each selected plugin, and `false`
 for chris-marketplace plugins that were enabled before but are now deselected. Do not add entries
-for plugins that were never selected, and never change entries for other marketplaces. Write
+for plugins that were never selected, and never change entries for other marketplaces. Leave
+`project-setup@chris-marketplace` exactly as it is: never set it to `false`, and if it is not in
+this file (the installer was enabled another way), do not add it. Write
 valid JSON with two-space indentation.
 
 **`.claude/project-params.md`**: create it if missing, starting with:
@@ -197,5 +200,6 @@ the `procedures` key of each agent's section.
 Report: the plugins enabled and disabled, files created or changed, procedures created and which
 agents load them, conflicts handled, parameters still `unknown`, and the next step: restart Claude Code in this folder (or run `/plugin`) and
 accept the chris-marketplace trust prompt so the plugins install; the repository is private, so
-this device needs `gh auth login` or a git credential. Say that re-running `/project-setup:install`
-updates the setup and keeps edited parameters.
+this device needs `gh auth login` or a git credential. Say that the installer stays enabled in
+this project, so re-running `/project-setup:install` updates the setup and keeps edited
+parameters, and that the user can remove it with `/plugin` if they do not want it there.

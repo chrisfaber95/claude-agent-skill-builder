@@ -5,6 +5,7 @@
     }
   },
   "enabledPlugins": {
+    "project-setup@chris-marketplace": true,
     "git@chris-marketplace": true,
     "sql@chris-marketplace": true,
     "db-performance@chris-marketplace": true,

@@ -88,12 +88,37 @@ needs `gh auth login` or a git credential).
 
 ### With the installer (recommended)
 
-Once per device, install the installer at user level, so it exists in every project:
+The installer is installed per project: it goes into that project's `.claude/settings.json`, so
+it is committed with the project and every device that opens the project gets it. Add it in one
+of two ways:
+
+**With commands**, in Claude Code opened in the project, choosing **project** scope in both
+pickers:
 
     /plugin marketplace add chrisfaber95/claude-agent-skill-builder
-    /plugin install project-setup@chris-marketplace      (choose user scope)
+    /plugin install project-setup@chris-marketplace
 
-Then, in any project, run `/project-setup:install`. It:
+(The CLI equivalent is `claude plugin marketplace add chrisfaber95/claude-agent-skill-builder
+--scope project` and `claude plugin install project-setup@chris-marketplace -s project`. Both
+default to user scope, so pass the scope.)
+
+**Without commands**, put this in the project's `.claude/settings.json` (merge it with what is
+there), then open the project and accept the marketplace and install prompts:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "chris-marketplace": {
+      "source": { "source": "github", "repo": "chrisfaber95/claude-agent-skill-builder" }
+    }
+  },
+  "enabledPlugins": {
+    "project-setup@chris-marketplace": true
+  }
+}
+```
+
+Then run `/project-setup:install` in that project. It:
 
 1. scans the project (manifests, dependencies, test scripts, CI files, databases, payment and
    mail libraries, git repositories, existing docs and `.claude/` files)
@@ -115,8 +140,9 @@ Then, in any project, run `/project-setup:install`. It:
    - `CLAUDE.md`: one marked block with the selected plugins' delegation instructions and an
      import of the parameters file; nothing outside the block is touched
 
-Restart Claude Code in the project (or run `/plugin`) and accept the marketplace prompt to
-install the plugins. Re-run `/project-setup:install` any time to add or remove plugins. Only
+Restart Claude Code in the project (or run `/plugin`) and accept the prompts to install the
+plugins. The installer stays enabled in the project, so you can re-run `/project-setup:install`
+any time to add or remove plugins; remove it with `/plugin` if you no longer want it there. Only
 plugins from this marketplace are ever offered.
 
 ### By hand

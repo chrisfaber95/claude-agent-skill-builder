@@ -21,3 +21,4 @@ Read by the project-setup installer. "Recommend when" decides whether the plugin
 | branch_protection | whether GitHub blocks bad merges | `gh api repos/{owner}/{repo}/branches/<default>/protection` (404 = none) | no, `unknown` if not readable |
 | extra_merge_gates | project conditions before a merge (documents, summaries) | project docs and CLAUDE.md | no |
 | after_merge_checks | checks after merging | project docs | no |
+| merge_mode | `auto` (default): the agent merges a PR on its own once every gate passes; `ask`: PRs are still opened without asking, but merges wait for the user | project docs that require manual merge approval | no, default `auto` |

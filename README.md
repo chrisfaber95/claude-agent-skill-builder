@@ -79,7 +79,10 @@ plugin, not by nested folders.
 
 Agents are subagents: they cannot ask you questions, so they act only on what the delegation
 prompt authorizes (each plugin's `CLAUDE.snippet.md` says what to include) and return proposals
-for anything else. Reviewers (`code-reviewer`, `architect-reviewer`) are read-only.
+for anything else. Reviewers (`code-reviewer`, `architect-reviewer`) are read-only. The git
+agent has defaults: commit, push, PR and merge (only once CI and every merge gate pass) are
+authorized unless the delegation restricts them; set `merge_mode: ask` in its section of
+`.claude/project-params.md` to keep opening PRs without asking but approve merges yourself.
 
 ## Use in a project
 

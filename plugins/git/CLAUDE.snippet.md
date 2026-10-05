@@ -6,8 +6,9 @@ cleanup, release, merge/rebase conflicts, git setup) to the `git-workflow-manage
 of `.claude/project-params.md`; the agent reads it.
 
 In every delegation prompt, include:
-- which actions are authorized: "commit", "push", "PR", "merge", "cleanup", "release",
-  "continue the rebase" (anything not listed is returned as a proposal)
+- which actions are authorized (default: "commit", "push", "PR", "merge", "cleanup", "release",
+  "continue the rebase"); omit "merge" if you want manual approval instead of auto-merge when
+  gates pass. Anything not listed is returned as a proposal
 - the Co-Authored-By trailer and PR attribution line for this session, if any
 - for a PR: why the change exists, architecture decisions, exactly which tests and checks were
   run, how it was manually validated, known limitations, and the revision id and name if one is
